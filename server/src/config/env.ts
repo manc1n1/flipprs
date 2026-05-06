@@ -23,8 +23,6 @@ const envSchema = z.object({
 
   DATABASE_URL: z.string().min(1),
 
-  RESET_DB_ON_START: z.stringbool().default(false),
-
   WIKI_BASE_URL: z.string().min(1),
   WG_BASE_URL: z.string().min(1),
 
