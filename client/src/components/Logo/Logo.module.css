@@ -1,0 +1,15 @@
+.logoContainer {
+  display: flex;
+}
+
+.logo {
+  display: flex;
+  padding-right: 0.75rem;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 768px) {
+  .name {
+    display: none;
+  }
+}

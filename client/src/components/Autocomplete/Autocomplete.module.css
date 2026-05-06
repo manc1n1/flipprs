@@ -1,0 +1,115 @@
+.autocompleteContainer {
+  position: relative;
+  width: 100%;
+}
+
+.autocompleteInput {
+  width: 100%;
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  padding: 8px 12px;
+  border: 1px solid var(--text-dark);
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  font-family: runescape;
+  font-size: 16px;
+}
+
+.autocompleteInput:focus {
+  border-color: var(--purple-dark);
+}
+
+.itemCount {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--green-dark);
+  opacity: 0.8;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+  animation: pulse 1.5s infinite;
+}
+
+.dotOffline {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--red-dark);
+  opacity: 0.8;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+  animation: pulse 1.5s infinite;
+}
+
+.autocompleteDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 0.25rem;
+  margin-top: 1px;
+  background-color: var(--accent-dark);
+  border: 1px solid var(--purple-dark);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+@media (prefers-color-scheme: light) {
+  .autocompleteInput {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    border: 1px solid var(--text-light);
+  }
+
+  .autocompleteInput:focus {
+    border-color: var(--yellow-light);
+  }
+
+  .itemCount {
+    color: var(--text-light);
+  }
+
+  .dot {
+    background-color: var(--green-light);
+  }
+
+  .dotOffline {
+    background-color: var(--red-light);
+  }
+
+  .autocompleteDropdown {
+    background-color: var(--accent-light);
+    border: 1px solid var(--yellow-light);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}

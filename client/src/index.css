@@ -1,0 +1,101 @@
+@font-face {
+  font-family: runescape;
+  src: url('assets/fonts/runescape.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: runescape-small;
+  src: url('assets/fonts/runescape_small.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: runescape-bold;
+  src: url('assets/fonts/runescape_bold.ttf') format('truetype');
+}
+
+:root {
+  --bg-dark: #1e1e2e;
+  --bg-light: #eff1f5;
+
+  --accent-dark: #181825;
+  --accent-light: #e6e9ef;
+
+  --text-dark: #cdd6f4;
+  --text-light: #4c4f69;
+
+  --red-dark: #f38ba8;
+  --orange-dark: #fab387;
+  --yellow-dark: #f9e2af;
+  --green-dark: #a6e3a1;
+  --blue-dark: #89b4fa;
+  --purple-dark: #cba6f7;
+
+  --red-light: #d20f39;
+  --orange-light: #fe640b;
+  --yellow-light: #df8e1d;
+  --green-light: #40a02b;
+  --blue-light: #1e66f5;
+  --purple-light: #8839ef;
+
+  --toastify-color-success: var(--green-dark);
+  --toastify-color-error: var(--red-dark);
+  --toastify-text-color-success: var(--green-light);
+  --toastify-text-color-error: var(--red-light);
+
+  font-family: runescape, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--text-dark);
+  background-color: var(--bg-dark);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* scrollbar-width: thin;
+  scrollbar-color: var(--text-dark) transparent; */
+
+  #tv-attr-logo {
+    display: none !important;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  background-color: var(--toastify-color-success);
+  color: var(--toastify-text-color-success);
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+  background-color: var(--toastify-color-error);
+  color: var(--toastify-text-color-error);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--text-light);
+    background-color: var(--bg-light);
+
+    --toastify-color-success: var(--green-light);
+    --toastify-color-error: var(--red-light);
+    --toastify-text-color-success: var(--green-dark);
+    --toastify-text-color-error: var(--red-dark);
+
+    /* scrollbar-color: var(--text-light) transparent; */
+  }
+
+  .Toastify__toast-theme--colored.Toastify__toast--success {
+    background-color: var(--toastify-color-success);
+    color: var(--toastify-text-color-success);
+  }
+
+  .Toastify__toast-theme--colored.Toastify__toast--error {
+    background-color: var(--toastify-color-error);
+    color: var(--toastify-text-color-error);
+  }
+}

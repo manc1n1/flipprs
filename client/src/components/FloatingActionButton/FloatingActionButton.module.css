@@ -1,0 +1,50 @@
+.container {
+  position: absolute;
+  bottom: 3.5rem;
+  right: 5.5vw;
+  z-index: 3;
+}
+
+.fab,
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: var(--purple-dark);
+  background: var(--accent-dark);
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.fabOpen {
+  color: var(--red-dark);
+}
+
+.actionButton {
+  position: absolute;
+  top: calc((60px - 35px) / 2);
+  left: calc((60px - 35px) / 2);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+@media (prefers-color-scheme: light) {
+  .fab,
+  .actionButton {
+    color: var(--yellow-light);
+    background: var(--accent-light);
+    border: 1px solid rgb(255 255 255 / 0.5);
+  }
+
+  .fabOpen {
+    color: var(--red-light);
+  }
+}

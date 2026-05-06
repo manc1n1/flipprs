@@ -1,0 +1,121 @@
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
+  height: calc(100dvh - 250px);
+}
+
+.scrollWrapper {
+  flex: 0 1 auto;
+  height: auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  overflow-anchor: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-x pan-y;
+  border: 1px solid var(--purple-dark);
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.table {
+  border-spacing: 0;
+  width: max-content;
+  min-width: 100%;
+  table-layout: auto;
+}
+
+.th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 1rem;
+  background: var(--accent-dark);
+  border-bottom: 1px solid var(--purple-dark);
+}
+
+.th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  box-shadow: 1px 0 0 var(--purple-dark);
+}
+
+.label {
+  display: flex;
+  font-family: runescape-bold;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.label:hover {
+  cursor: pointer;
+}
+
+.sortIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.tableBodyRow:nth-child(even) {
+  background: var(--accent-dark);
+}
+
+.tableBodyRow:hover {
+  background: var(--accent-dark);
+}
+
+.td {
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--accent-dark);
+  box-shadow: 1px 0 0 var(--purple-dark);
+}
+
+.td:first-child a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.td:nth-child(2) {
+  text-align: left;
+}
+
+@media (prefers-color-scheme: light) {
+  .scrollWrapper {
+    border: 1px solid var(--yellow-light);
+  }
+
+  .th {
+    background: var(--accent-light);
+    border-bottom: 1px solid var(--yellow-light);
+  }
+
+  .th:first-child {
+    box-shadow: 1px 0 0 var(--yellow-light);
+  }
+
+  .tableBodyRow:nth-child(even) {
+    background: var(--accent-light);
+  }
+
+  .tableBodyRow:hover {
+    background: var(--accent-light);
+  }
+
+  .td:first-child {
+    background: var(--accent-light);
+    box-shadow: 1px 0 0 var(--yellow-light);
+  }
+}

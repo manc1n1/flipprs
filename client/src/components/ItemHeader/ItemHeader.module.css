@@ -1,0 +1,131 @@
+.container {
+  position: sticky;
+  top: 80px;
+  z-index: 999;
+  display: flex;
+  padding-block: 0.5rem 0;
+  flex-direction: column;
+  font-size: 1.5rem;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  left: calc(-50vw + 50%);
+  right: calc(-50vw + 50%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+.favouriteMotionButton,
+.motionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.subheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.currentPrice {
+  font-family: runescape-bold;
+}
+
+.priceChange {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: runescape-small;
+}
+
+.negative {
+  color: var(--red-dark);
+}
+
+.positive {
+  color: var(--green-dark);
+}
+
+.timestamp {
+  font-family: runescape-small;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.itemId {
+  font-family: runescape-small;
+  font-size: 1rem;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+.favoriteFill {
+  color: var(--red-dark);
+  fill: var(--red-dark);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wikiIcon {
+  width: 38px;
+}
+
+.osrsIcon {
+  width: 22px;
+}
+
+.wikiIcon,
+.osrsIcon,
+.copyIcon {
+  color: var(--text-dark);
+}
+
+@media (prefers-color-scheme: light) {
+  .favoriteFill {
+    color: var(--red-light);
+    fill: var(--red-light);
+  }
+
+  .positive {
+    color: var(--green-light);
+  }
+
+  .negative {
+    color: var(--red-light);
+  }
+
+  .wikiIcon,
+  .osrsIcon,
+  .copyIcon {
+    color: var(--text-light);
+  }
+}

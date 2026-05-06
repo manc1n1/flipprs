@@ -1,0 +1,108 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #00000070;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: clamp(0%, 400px, 60%);
+  height: min(50%, 300px);
+  background-color: var(--accent-dark);
+  margin: auto;
+  padding: 0 2rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--purple-dark);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: calc(1.25rem - 0.25rem);
+  right: calc(1rem - 0.25rem);
+  padding: 0.25rem;
+  background: transparent;
+  border: none;
+  color: var(--purple-dark);
+  line-height: 0;
+  cursor: pointer;
+}
+
+.title {
+  position: absolute;
+  top: calc(1.25rem - 0.25rem);
+  left: calc(1rem - 0.25rem);
+  font-size: 1.5rem;
+  padding: 0.25rem;
+}
+
+.actions {
+  position: absolute;
+  display: flex;
+  bottom: 1.25rem;
+  right: 1rem;
+  gap: 1rem;
+}
+
+.cancelButton,
+.confirmButton {
+  font-family: runescape;
+  font-size: 1.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelButton {
+  color: var(--red-dark);
+}
+
+.confirmButton {
+  color: var(--green-dark);
+}
+
+.closeButton:hover,
+.cancelButton:hover,
+.confirmButton:hover {
+  opacity: 0.8;
+}
+
+.content {
+  position: absolute;
+  top: calc(50% - 1.15rem);
+  left: calc(1rem - 0.25rem);
+  padding: 0.25rem;
+  font-size: 1.15rem;
+}
+
+@media (prefers-color-scheme: light) {
+  .modal {
+    background-color: var(--accent-light);
+    border: 1px solid var(--yellow-light);
+  }
+
+  .closeButton {
+    color: var(--yellow-light);
+  }
+
+  .cancelButton {
+    color: var(--red-light);
+  }
+
+  .confirmButton {
+    color: var(--green-light);
+  }
+}

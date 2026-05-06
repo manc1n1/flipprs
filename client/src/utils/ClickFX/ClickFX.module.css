@@ -1,0 +1,49 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.sprite {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  transform: translate(-50%, -50%) scale(0.9);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  image-rendering: pixelated;
+  animation: clickfx-frames var(--duration) linear forwards,
+    clickfx-pop var(--duration) ease-out forwards;
+}
+
+@keyframes clickfx-frames {
+  0%,
+  24.99% {
+    background-image: var(--f1);
+  }
+  25%,
+  49.99% {
+    background-image: var(--f2);
+  }
+  50%,
+  74.99% {
+    background-image: var(--f3);
+  }
+  75%,
+  100% {
+    background-image: var(--f4);
+  }
+}
+
+@keyframes clickfx-pop {
+  from {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}

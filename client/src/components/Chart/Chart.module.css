@@ -1,0 +1,89 @@
+.chart {
+  position: relative;
+  --bg-color: var(--bg-dark);
+  --text-color: var(--text-dark);
+  --label-color: var(--accent-dark);
+  --line-color: var(--text-dark);
+  --line-green: var(--green-dark);
+  --line-red: var(--red-dark);
+  --top: #cdd6f466;
+  --top-green: #a6e3a166;
+  --top-red: #f38ba866;
+  --bottom: #00000000;
+  --bottom-green: #a6e3a100;
+  --bottom-red: #f38ba800;
+  --crosshair: #cdd6f466;
+}
+
+.tooltip {
+  position: absolute;
+  display: none;
+  z-index: 3;
+  min-width: 150px;
+  padding: 0.65rem 0.75rem;
+  font-family: runescape-bold;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  background: color-mix(in srgb, var(--accent-dark) 50%, transparent);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.tooltipDate {
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.tooltipRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1.5;
+}
+
+.tooltipRow span {
+  opacity: 0.8;
+}
+
+.emptyChart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 0.25rem;
+  font-family: runescape-small;
+  font-size: 1.5rem;
+  background: var(--accent-dark);
+}
+
+@media (prefers-color-scheme: light) {
+  .chart {
+    --bg-color: var(--bg-light);
+    --text-color: var(--text-light);
+    --label-color: var(--accent-light);
+    --line-color: var(--text-light);
+    --line-green: var(--green-light);
+    --line-red: var(--red-light);
+    --top: #4c4f6966;
+    --top-green: #40a02b66;
+    --top-red: #d20f3966;
+    --bottom: #00000000;
+    --bottom-green: #40a02b00;
+    --bottom-red: #d20f3900;
+    --crosshair: #4c4f6966;
+  }
+
+  .tooltip {
+    color: var(--text-light);
+    background: color-mix(in srgb, var(--accent-light) 50%, transparent);
+    border: 1px solid rgb(255 255 255 / 0.5);
+  }
+
+  .emptyChart {
+    background: var(--accent-light);
+  }
+}

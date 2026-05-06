@@ -1,0 +1,86 @@
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.itemContainer {
+  box-sizing: border-box;
+  padding: 0 0.5rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.chartStage {
+  position: relative;
+  height: 300px;
+}
+
+.chartLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.timestepContainer {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  place-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0rem;
+}
+
+.rangeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5rem 0rem;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  font-family: runescape-bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.rangeButton:focus {
+  outline: none;
+}
+
+.activeRange {
+  background: var(--accent-dark);
+  border-radius: 8px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rangeButton:hover {
+    background: var(--accent-dark);
+    border-radius: 8px;
+  }
+}
+
+.rangeButton span {
+  transform: translateY(1px);
+}
+
+.rangeTitle {
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: light) {
+  .activeRange {
+    background: var(--accent-light);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .rangeButton:hover {
+      background: var(--accent-light);
+    }
+  }
+}
