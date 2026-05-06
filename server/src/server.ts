@@ -18,7 +18,7 @@ async function startServer(): Promise<void> {
 
     await runMigrations();
 
-    if (env.RESET_DB_ON_START) {
+    if (env.RAILWAY_ENVIRONMENT_NAME === 'development') {
       await resetDb();
       console.log('Database reset complete');
     }
