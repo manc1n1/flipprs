@@ -26,7 +26,10 @@ const envSchema = z.object({
   WIKI_BASE_URL: z.string().min(1),
   WG_BASE_URL: z.string().min(1),
 
-  CORS_ORIGINS_DEV: urlListSchema,
+  CORS_ORIGINS_DEV: urlListSchema.default([
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+  ]),
   CORS_ORIGINS_PROD: urlListSchema,
 
   // Railway-provided variables
