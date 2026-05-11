@@ -625,7 +625,7 @@ export const Chart = ({
 
             <div class="${styles.tooltipRow}">
               <span>Buy volume</span>
-              <strong>${formatNumber(buyVolume)}</strong>
+              <strong>${formatNumber(buyVolume ?? 0)}</strong>
             </div>
 
             <div class="${styles.tooltipRow}">

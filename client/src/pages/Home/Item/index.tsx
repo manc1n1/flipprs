@@ -138,19 +138,31 @@ const Item = ({ itemId }: { itemId: number }) => {
 
   const highPriceVolumeData = useMemo<HistogramData<UTCTimestamp>[]>(
     () =>
-      (timeseries ?? []).map((ts) => ({
-        time: ts.timestamp,
-        value: ts.highPriceVolume ?? 0,
-      })),
+      (timeseries ?? []).reduce<HistogramData<UTCTimestamp>[]>((acc, ts) => {
+        if (ts.highPriceVolume > 0) {
+          acc.push({
+            time: ts.timestamp,
+            value: ts.highPriceVolume,
+          });
+        }
+
+        return acc;
+      }, []),
     [timeseries],
   );
 
   const lowPriceVolumeData = useMemo<HistogramData<UTCTimestamp>[]>(
     () =>
-      (timeseries ?? []).map((ts) => ({
-        time: ts.timestamp,
-        value: -(ts.lowPriceVolume ?? 0),
-      })),
+      (timeseries ?? []).reduce<HistogramData<UTCTimestamp>[]>((acc, ts) => {
+        if (ts.lowPriceVolume > 0) {
+          acc.push({
+            time: ts.timestamp,
+            value: -ts.lowPriceVolume,
+          });
+        }
+
+        return acc;
+      }, []),
     [timeseries],
   );
 
