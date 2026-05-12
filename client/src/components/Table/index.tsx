@@ -9,8 +9,6 @@ import {
   ArrowUpNarrowWide,
 } from 'lucide-react';
 
-import { useHaptics } from '@/hooks/useHaptics';
-
 export interface IColumn<T> {
   header?: React.ReactNode;
   accessor: keyof T | ((row: T) => any);
@@ -32,7 +30,6 @@ export function Table<T extends Record<string, any>>({
   columns,
   data,
 }: ITableProps<T>) {
-  const { selection } = useHaptics();
   const [sortConfig, setSortConfig] = useState<ISortConfig | null>(null);
 
   const getValue = useCallback(
@@ -67,8 +64,6 @@ export function Table<T extends Record<string, any>>({
   }, [columns, data, getValue, sortConfig]);
 
   const handleSort = (colIndex: number) => {
-    selection();
-
     if (columns[colIndex].sortable === false) return;
 
     if (!sortConfig || sortConfig.columnIndex !== colIndex) {

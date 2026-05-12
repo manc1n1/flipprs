@@ -12,7 +12,6 @@ import { Chart } from '@/components/Chart';
 import { useItemDetailQuery } from '@/hooks/useItemDetailQuery';
 import { useTimeseriesQuery } from '@/hooks/useTimeseriesQuery';
 import { useHistoryTimeseriesQuery } from '@/hooks/useHistoryTimeseriesQuery';
-import { useHaptics } from '@/hooks/useHaptics';
 
 import type { TAChart, TTIME_RANGE_KEY } from '@/types/chart';
 import type { TItem, TPriceChangeSummary } from '@/types/item';
@@ -66,7 +65,6 @@ function getPriceChangeSummary(
 }
 
 const Item = ({ itemId }: { itemId: number }) => {
-  const { selection } = useHaptics();
   const { item } = useItemDetailQuery(itemId);
   const [range, setRange] = useState<TTIME_RANGE_KEY>('1D');
   const [showAdvancedChart, setShowAdvancedChart] = useState(false);
@@ -230,7 +228,6 @@ const Item = ({ itemId }: { itemId: number }) => {
   const handleRangeClick = (k: TTIME_RANGE_KEY) => {
     if (loadingTs || loadingHistoryTs) return;
 
-    selection();
     setRange(k);
   };
 
@@ -310,7 +307,6 @@ const Item = ({ itemId }: { itemId: number }) => {
             <motion.button
               type='button'
               onClick={() => {
-                selection();
                 setShowAdvancedChart((prev) => !prev);
               }}
               whileTap={{ scale: 0.95 }}

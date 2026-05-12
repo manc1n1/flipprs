@@ -9,8 +9,6 @@ import { motion, useReducedMotion } from 'framer-motion';
 import Flippers from '@/assets/images/flippers.png';
 import DarkFlippers from '@/assets/images/dark_flippers.png';
 
-import { useHaptics } from '@/hooks/useHaptics';
-
 type FooterLink = {
   title: string;
   href: string;
@@ -53,10 +51,7 @@ const footerLinks: FooterSection[] = [
 ];
 
 function Footer() {
-  const { selection } = useHaptics();
-
   const handleFooterNavClick = () => {
-    selection();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -95,7 +90,6 @@ function Footer() {
                 href='https://oldschool.runescape.wiki'
                 target='_blank'
                 rel='noreferrer noopener'
-                onClick={selection}
               >
                 Old School RuneScape Wiki
               </a>
@@ -104,7 +98,6 @@ function Footer() {
                 href='https://runelite.net'
                 target='_blank'
                 rel='noreferrer noopener'
-                onClick={selection}
               >
                 RuneLite
               </a>

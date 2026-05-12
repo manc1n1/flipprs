@@ -3,8 +3,6 @@ import styles from './Row.module.css';
 import React, { useRef } from 'react';
 import type { ListChildComponentProps } from 'react-window';
 
-import { useHaptics } from '@/hooks/useHaptics';
-
 export interface IItemData<T> {
   filteredOptions: T[];
   highlightedIndex: number;
@@ -24,7 +22,6 @@ function Row<T>({ index, style, data }: ListChildComponentProps<IItemData<T>>) {
     onSelect,
     setHighlightedIndex,
   } = data;
-  const { selection } = useHaptics();
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const isDraggingRef = useRef(false);
   const item = filteredOptions[index];
@@ -65,7 +62,7 @@ function Row<T>({ index, style, data }: ListChildComponentProps<IItemData<T>>) {
         }
 
         e.preventDefault();
-        selection();
+
         onSelect(item);
 
         pointerStartRef.current = null;

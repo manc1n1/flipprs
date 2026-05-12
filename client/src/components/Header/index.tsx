@@ -11,14 +11,12 @@ import Logo from '@/components/Logo';
 import WikiImage from '@/components/WikiImage';
 
 import { useItemsQuery } from '@/hooks/useItemsQuery';
-import { useHaptics } from '@/hooks/useHaptics';
 
 import type { TSearchItem } from '@/types/item';
 
 const AUTOCOMPLETE_SCROLL_THRESHOLD = 150;
 
 const Header = () => {
-  const { selection } = useHaptics();
   const [isOpen, setOpen] = useState(false);
   const [hasScrolledPastThreshold, setHasScrolledPastThreshold] =
     useState(false);
@@ -81,7 +79,6 @@ const Header = () => {
   };
 
   const scrollToTopWithHaptic = () => {
-    selection();
     requestAnimationFrame(() => {
       scrollToTop();
     });
@@ -111,7 +108,6 @@ const Header = () => {
           <Hamburger
             toggled={isOpen}
             toggle={setOpen}
-            onToggle={selection}
             size={25}
             duration={0.2}
             rounded
@@ -135,7 +131,6 @@ const Header = () => {
             <motion.button
               className={styles.navItem}
               type='button'
-              onClick={selection}
               whileTap={{ scale: 0.99 }}
             >
               <Heart
@@ -153,7 +148,6 @@ const Header = () => {
             <motion.button
               className={styles.navItem}
               type='button'
-              onClick={selection}
               whileTap={{ scale: 0.99 }}
             >
               <Skull size={22} />
