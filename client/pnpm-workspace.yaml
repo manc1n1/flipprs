@@ -1,0 +1,8 @@
+# minimumReleaseAge: 10080
+minimumReleaseAgeIgnoreMissingTime: true
+blockExoticSubdeps: true
+resolutionMode: highest
+
+allowBuilds:
+  esbuild: true
+  sharp: true
