@@ -288,7 +288,7 @@ export const Chart = ({
       priceFormat: {
         type: 'volume',
       },
-      priceScaleId: '',
+      priceScaleId: 'high-volume',
     });
 
     const lowVolSeries = chart.addSeries(HistogramSeries, {
@@ -297,7 +297,7 @@ export const Chart = ({
       priceFormat: {
         type: 'volume',
       },
-      priceScaleId: '',
+      priceScaleId: 'low-volume',
     });
 
     const totalVolSeries = chart.addSeries(HistogramSeries, {
@@ -306,19 +306,19 @@ export const Chart = ({
       priceFormat: {
         type: 'volume',
       },
-      priceScaleId: '',
+      priceScaleId: 'total-volume',
     });
 
     hiVolSeries.priceScale().applyOptions({
       scaleMargins: {
-        top: 0.85,
-        bottom: 0,
+        top: 0.9,
+        bottom: 0.05,
       },
     });
 
     lowVolSeries.priceScale().applyOptions({
       scaleMargins: {
-        top: 0.85,
+        top: 0.95,
         bottom: 0,
       },
     });
