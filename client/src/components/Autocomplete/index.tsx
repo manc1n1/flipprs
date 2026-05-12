@@ -17,7 +17,6 @@ import { type IItemData, MemoizedRow } from '@/components/Row';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 import { useDebouncedCallback } from '@/hooks/useDebouncedCallback';
-import { useHaptics } from '@/hooks/useHaptics';
 
 import type { TSearchItem } from '@/types/item';
 
@@ -46,7 +45,6 @@ export const Autocomplete = forwardRef<
   }: IAutocompleteProps<T>,
   ref: Ref<unknown>,
 ) {
-  const { selection } = useHaptics();
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
@@ -170,7 +168,6 @@ export const Autocomplete = forwardRef<
           updateFilteredOptions(val);
         }}
         onFocus={() => {
-          selection();
           if (filteredOptions.length > 0) {
             setIsOpen(true);
           }

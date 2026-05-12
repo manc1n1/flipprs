@@ -20,7 +20,6 @@ import { LastUpdateTime } from '../ItemMetrics/LastUpdateTime';
 
 import { useFavourites } from '@/hooks/useFavourites';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
-import { useHaptics } from '@/hooks/useHaptics';
 
 import type { TItem, TPriceChangeSummary } from '@/types/item';
 import type { TTIME_RANGE_KEY } from '@/types/chart';
@@ -39,23 +38,16 @@ const ItemHeader = memo(function ItemHeader({
   latestTrade: number;
   priceChangeSummary: TPriceChangeSummary | null;
 }) {
-  const { success, selection } = useHaptics();
   const { isFavourite, toggleFavourite } = useFavourites();
   const { copy } = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
   const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleClick = useCallback(() => {
-    selection();
-  }, [selection]);
-
   const handleFavourite = useCallback(() => {
-    selection();
     toggleFavourite(item.id);
-  }, [item.id, selection, toggleFavourite]);
+  }, [item.id, toggleFavourite]);
 
   const handleCopy = useCallback(() => {
-    success();
     copy(window.location.href);
 
     setCopied(true);
@@ -67,7 +59,7 @@ const ItemHeader = memo(function ItemHeader({
       setCopied(false);
       copyTimeoutRef.current = null;
     }, 2000);
-  }, [copy, success]);
+  }, [copy]);
 
   useEffect(() => {
     return () => {
@@ -152,7 +144,6 @@ const ItemHeader = memo(function ItemHeader({
             <motion.button
               type='button'
               aria-label='To wiki'
-              onClick={handleClick}
               className={styles.motionButton}
               whileTap={{ scale: 0.95 }}
             >
@@ -168,7 +159,6 @@ const ItemHeader = memo(function ItemHeader({
               type='button'
               tabIndex={0}
               aria-label='To official grand exchange'
-              onClick={handleClick}
               className={styles.motionButton}
               whileTap={{ scale: 0.95 }}
             >

@@ -5,8 +5,6 @@ import ReactDOM from 'react-dom';
 import { motion, Variants } from 'framer-motion';
 import { X } from 'lucide-react';
 
-import { useHaptics } from '@/hooks/useHaptics';
-
 interface IModalProps {
   isOpen: boolean;
   title?: string;
@@ -43,7 +41,6 @@ const Modal = ({
   onConfirm,
   onCancel,
 }: IModalProps) => {
-  const { selection } = useHaptics();
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -86,7 +83,6 @@ const Modal = ({
             type='button'
             className={styles.closeButton}
             onClick={() => {
-              selection();
               onCancel();
             }}
             aria-label='Close modal'
@@ -102,7 +98,6 @@ const Modal = ({
               type='button'
               className={styles.cancelButton}
               onClick={() => {
-                selection();
                 onCancel();
               }}
             >
@@ -114,7 +109,6 @@ const Modal = ({
               type='button'
               className={styles.confirmButton}
               onClick={() => {
-                selection();
                 onConfirm();
               }}
             >

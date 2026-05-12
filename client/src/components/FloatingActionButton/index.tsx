@@ -3,8 +3,6 @@ import styles from './FloatingActionButton.module.css';
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { useHaptics } from '@/hooks/useHaptics';
-
 export type TDirection = 'up' | 'down' | 'left' | 'right';
 
 export interface IFABAction {
@@ -31,11 +29,9 @@ const FloatingActionButton = ({
   fabIcon,
   label,
 }: IFABProps) => {
-  const { selection } = useHaptics();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
-    selection();
     setIsOpen((open) => !open);
   };
 
@@ -58,7 +54,6 @@ const FloatingActionButton = ({
                 aria-label={action.label}
                 title={action.label}
                 onClick={() => {
-                  selection();
                   action.onClick();
                 }}
                 className={styles.actionButton}

@@ -35,7 +35,6 @@ import {
 
 import { useFavourites } from '@/hooks/useFavourites';
 import { useFavouriteItemsQuery } from '@/hooks/useFavouriteItemsQuery';
-import { useHaptics } from '@/hooks/useHaptics';
 
 import type { TItem } from '@/types/item';
 
@@ -43,7 +42,6 @@ import MemberIcon from '@/assets/images/Member_icon.png';
 import F2PIcon from '@/assets/images/Free-to-play_icon.png';
 
 const Favourites = () => {
-  const { selection } = useHaptics();
   const {
     favourites,
     isLoadingFavourites,
@@ -106,9 +104,8 @@ const Favourites = () => {
   const hasFavourites = favourites.length > 0;
 
   const handleTableNavClick = useCallback(() => {
-    selection();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [selection]);
+  }, []);
 
   const actions: IFABAction[] = [
     {
@@ -262,7 +259,7 @@ const Favourites = () => {
             aria-label='Remove favourite'
             onClick={(e) => {
               e.stopPropagation();
-              selection();
+
               void toggleFavourite(row.id);
             }}
             className={styles.motionButton}
@@ -277,7 +274,7 @@ const Favourites = () => {
         ),
       },
     ],
-    [handleTableNavClick, isFavourite, selection, toggleFavourite],
+    [handleTableNavClick, isFavourite, toggleFavourite],
   );
 
   if (loading) {
