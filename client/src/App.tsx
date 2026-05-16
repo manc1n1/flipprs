@@ -22,15 +22,8 @@ function App() {
         draggablePercent={40}
         theme='colored'
         stacked
-        style={{
-          left: '50%',
-          transform: 'translateX(-50%)',
-        }}
-        toastStyle={{
-          fontFamily: 'runescape-bold',
-          marginBottom: '1rem',
-          borderRadius: 'var(--toastify-toast-bd-radius)',
-        }}
+        className='toastContainer'
+        toastClassName='toast'
       />
     </>
   );
