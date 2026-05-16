@@ -19,7 +19,7 @@ function App() {
         hideProgressBar={false}
         pauseOnHover
         draggable
-        draggablePercent={60}
+        draggablePercent={40}
         theme='colored'
         stacked
         style={{

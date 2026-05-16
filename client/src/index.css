@@ -37,10 +37,14 @@
   --blue-light: #1e66f5;
   --purple-light: #8839ef;
 
-  --toastify-color-success: var(--green-dark);
-  --toastify-color-error: var(--red-dark);
-  --toastify-text-color-success: var(--green-light);
-  --toastify-text-color-error: var(--red-light);
+  --toastify-color-success: var(--green-dark) !important;
+  --toastify-color-error: var(--red-dark) !important;
+  --toastify-text-color-success: var(--green-light) !important;
+  --toastify-text-color-error: var(--red-light) !important;
+
+  .toast {
+    font-family: runescape-bold;
+  }
 
   font-family: runescape, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
@@ -81,10 +85,10 @@ body {
     color: var(--text-light);
     background-color: var(--bg-light);
 
-    --toastify-color-success: var(--green-light);
-    --toastify-color-error: var(--red-light);
-    --toastify-text-color-success: var(--green-dark);
-    --toastify-text-color-error: var(--red-dark);
+    --toastify-color-success: var(--green-light) !important;
+    --toastify-color-error: var(--red-light) !important;
+    --toastify-text-color-success: var(--green-dark) !important;
+    --toastify-text-color-error: var(--red-dark) !important;
 
     /* scrollbar-color: var(--text-light) transparent; */
   }
