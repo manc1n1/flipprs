@@ -12,7 +12,7 @@ import {
   Trash2,
   Upload,
 } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 import { Table, type IColumn } from '@/components/Table';
 import WikiImage from '@/components/WikiImage';
@@ -50,6 +50,7 @@ const Favourites = () => {
     refresh,
     deleteAll,
   } = useFavourites();
+
   const { favItems, loading } = useFavouriteItemsQuery({
     favourites,
     isLoadingFavourites,
@@ -57,28 +58,40 @@ const Favourites = () => {
 
   const exportFavourites = async () => {
     const itemIds = await getAllFavourites();
+
     if (itemIds.length > 0) {
       const blob = new Blob([JSON.stringify(itemIds, null, 2)], {
         type: 'application/json',
       });
+
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
+
       a.href = url;
       a.download = 'flipprs-favourites.json';
       a.click();
+
       URL.revokeObjectURL(url);
     } else {
-      toast.error('No favourites to export', { icon: <FileWarning /> });
+      toast.error('No favourites to export', {
+        id: 'no-favourites-export-toast',
+        icon: <FileWarning />,
+        duration: 1500,
+      });
     }
   };
 
   const importFavourites = () => {
     const input = document.createElement('input');
+
     input.type = 'file';
     input.accept = 'application/json';
+
     input.onchange = async () => {
       const file = input.files?.[0];
+
       if (!file) return;
+
       try {
         const text = await file.text();
         const itemIds: number[] = JSON.parse(text);
@@ -92,12 +105,19 @@ const Favourites = () => {
         bc.close();
 
         toast.success(`Imported ${itemIds.length} favourites`, {
+          id: 'import-favourites-toast',
           icon: <Download />,
+          duration: 1500,
         });
       } catch {
-        toast.error('Invalid file format', { icon: <FileWarning /> });
+        toast.error('Invalid file format', {
+          id: 'invalid-favourites-file-toast',
+          icon: <FileWarning />,
+          duration: 1500,
+        });
       }
     };
+
     input.click();
   };
 
@@ -259,7 +279,6 @@ const Favourites = () => {
             aria-label='Remove favourite'
             onClick={(e) => {
               e.stopPropagation();
-
               void toggleFavourite(row.id);
             }}
             className={styles.motionButton}

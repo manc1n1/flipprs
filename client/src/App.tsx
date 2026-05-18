@@ -1,5 +1,5 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-import { ToastContainer } from 'react-toastify';
+import { Toaster } from 'sonner';
 
 import AppRoutes from '@/routes';
 
@@ -10,21 +10,20 @@ function App() {
   return (
     <>
       <ClickFX />
+      <Toaster
+        position='bottom-center'
+        richColors
+        duration={1500}
+        toastOptions={{
+          className: 'toast',
+          style: {
+            fontSize: '1rem',
+          },
+        }}
+      />
       <QueryClientProvider client={queryClient}>
         <AppRoutes />
       </QueryClientProvider>
-      <ToastContainer
-        position='bottom-center'
-        autoClose={1500}
-        hideProgressBar={false}
-        pauseOnHover
-        draggable
-        draggablePercent={40}
-        theme='colored'
-        stacked
-        className='toastContainer'
-        toastClassName='toast'
-      />
     </>
   );
 }

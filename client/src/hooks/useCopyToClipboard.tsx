@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { CopyCheck, CopyX } from 'lucide-react';
 
 type TCopyStatus = 'idle' | 'copying' | 'success' | 'error';
@@ -11,31 +11,18 @@ export function useCopyToClipboard() {
   const [status, setStatus] = useState<TCopyStatus>('idle');
 
   const showCopiedToast = useCallback(() => {
-    const options = {
-      toastId: COPY_TOAST_ID,
+    toast.success('Copied link', {
+      id: COPY_TOAST_ID,
       icon: <CopyCheck />,
-      autoClose: 1500,
-    };
-
-    if (toast.isActive(COPY_TOAST_ID)) {
-      toast.update(COPY_TOAST_ID, {
-        render: 'Copied link',
-        type: 'success',
-        icon: <CopyCheck />,
-        autoClose: 1500,
-        isLoading: false,
-      });
-      return;
-    }
-
-    toast.success('Copied link', options);
+      duration: 1500,
+    });
   }, []);
 
   const showCopyErrorToast = useCallback(() => {
     toast.error('Failed to copy', {
-      toastId: FAILED_COPY_TOAST_ID,
+      id: FAILED_COPY_TOAST_ID,
       icon: <CopyX />,
-      autoClose: 1500,
+      duration: 1500,
     });
   }, []);
 
