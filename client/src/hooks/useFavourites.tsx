@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { toast } from 'react-toastify';
-import { HeartCrack, HeartMinus, HeartPlus } from 'lucide-react';
+import { toast } from 'sonner';
+import { HeartMinus, HeartPlus, Trash2 } from 'lucide-react';
 
 import {
   getAllFavourites,
@@ -13,7 +13,7 @@ import {
 export function useFavourites() {
   const [favourites, setFavourites] = useState<number[]>([]);
   const [isLoadingFavourites, setIsLoadingFavourites] = useState(true);
-  const toastId = useRef<string | number | null>(null);
+  const toastId = useRef<string | number>('favourite-toast');
   const bc = useRef<BroadcastChannel | null>(null);
 
   const refresh = useCallback(async () => {
@@ -40,22 +40,24 @@ export function useFavourites() {
   }, []);
 
   const showToast = useCallback((removed: boolean) => {
-    const render = removed ? 'Removed favourite' : 'Added favourite';
-    const type = removed ? 'error' : 'success';
+    const message = removed ? 'Removed favourite' : 'Added favourite';
     const icon = removed ? <HeartMinus /> : <HeartPlus />;
 
-    if (toastId.current !== null && toast.isActive(toastId.current)) {
-      toast.update(toastId.current, {
-        render,
-        type,
+    if (removed) {
+      toast.error(message, {
+        id: toastId.current,
         icon,
+        duration: 1500,
       });
+
       return;
     }
 
-    toastId.current = removed
-      ? toast.error(render, { icon })
-      : toast.success(render, { icon });
+    toast.success(message, {
+      id: toastId.current,
+      icon,
+      duration: 1500,
+    });
   }, []);
 
   const toggleFavourite = useCallback(
@@ -81,7 +83,13 @@ export function useFavourites() {
   const deleteAll = useCallback(async () => {
     await deleteAllFavourites();
     setFavourites([]);
-    toast.error(`Cleared favourites`, { icon: <HeartCrack /> });
+
+    toast.error('Cleared favourites', {
+      id: 'clear-favourites-toast',
+      icon: <Trash2 />,
+      duration: 1500,
+    });
+
     bcChange();
   }, [bcChange]);
 

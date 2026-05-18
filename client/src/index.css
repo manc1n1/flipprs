@@ -37,15 +37,6 @@
   --blue-light: #1e66f5;
   --purple-light: #8839ef;
 
-  --toastify-color-success: var(--green-dark) !important;
-  --toastify-color-error: var(--red-dark) !important;
-  --toastify-text-color-success: var(--green-light) !important;
-  --toastify-text-color-error: var(--red-light) !important;
-
-  .toast {
-    font-family: runescape-bold;
-  }
-
   font-family: runescape, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
 
@@ -57,6 +48,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .toast {
+    font-family: runescape-bold;
+  }
+
+  .toast svg {
+    width: 18px;
+    height: 18px;
+  }
 
   /* scrollbar-width: thin;
   scrollbar-color: var(--text-dark) transparent; */
@@ -70,36 +70,11 @@ body {
   margin: 0;
 }
 
-.Toastify__toast-theme--colored.Toastify__toast--success {
-  background-color: var(--toastify-color-success);
-  color: var(--toastify-text-color-success);
-}
-
-.Toastify__toast-theme--colored.Toastify__toast--error {
-  background-color: var(--toastify-color-error);
-  color: var(--toastify-text-color-error);
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--text-light);
     background-color: var(--bg-light);
 
-    --toastify-color-success: var(--green-light) !important;
-    --toastify-color-error: var(--red-light) !important;
-    --toastify-text-color-success: var(--green-dark) !important;
-    --toastify-text-color-error: var(--red-dark) !important;
-
     /* scrollbar-color: var(--text-light) transparent; */
-  }
-
-  .Toastify__toast-theme--colored.Toastify__toast--success {
-    background-color: var(--toastify-color-success);
-    color: var(--toastify-text-color-success);
-  }
-
-  .Toastify__toast-theme--colored.Toastify__toast--error {
-    background-color: var(--toastify-color-error);
-    color: var(--toastify-text-color-error);
   }
 }
