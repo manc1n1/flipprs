@@ -1,0 +1,73 @@
+.loadingContainer,
+.noFavouritesContainer {
+  display: flex;
+  align-items: center;
+}
+
+.noFavouritesIcon {
+  color: var(--red-dark);
+}
+
+.motionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.importButton:hover {
+  color: var(--green-dark);
+}
+
+.exportButton:hover {
+  color: var(--orange-dark);
+}
+
+.trashButton:hover {
+  color: var(--red-dark);
+}
+
+.itemLink {
+  padding-left: 1rem;
+  color: inherit;
+}
+
+.itemLink:hover {
+  opacity: 0.8;
+}
+
+.price {
+  font-family: runescape-bold;
+}
+
+.favoriteFill {
+  color: var(--red-dark);
+  fill: var(--red-dark);
+}
+
+@media (prefers-color-scheme: light) {
+  .noFavouritesIcon {
+    color: var(--red-light);
+  }
+
+  .importButton:hover {
+    color: var(--green-light);
+  }
+
+  .exportButton:hover {
+    color: var(--orange-light);
+  }
+
+  .trashButton:hover {
+    color: var(--red-light);
+  }
+
+  .favoriteFill {
+    color: var(--red-light);
+    fill: var(--red-light);
+  }
+}

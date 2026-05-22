@@ -1,0 +1,140 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  background: var(--accent-dark);
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.container {
+  display: grid;
+  width: 100%;
+  padding: 1.5rem 0;
+  gap: 2rem;
+}
+
+.content {
+  display: flex;
+  gap: 5rem;
+}
+
+.brand {
+  display: inline-flex;
+  color: var(--text-dark);
+  text-decoration: none;
+  gap: 1rem;
+}
+
+.logo {
+  height: 1rem;
+  image-rendering: pixelated;
+  transform: translateY(-4px);
+}
+
+.disclaimerContainer {
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.disclaimer a {
+  color: var(--purple-dark);
+}
+
+.disclaimer a:hover {
+  opacity: 0.8;
+}
+
+.linksGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+
+.sectionTitle {
+  font-family: runescape-bold;
+  margin: 0;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 0.5rem;
+  list-style: none;
+  text-wrap: nowrap;
+}
+
+.link {
+  display: inline-flex;
+  gap: 0.25rem;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+.link svg {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(-1px);
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--purple-dark),
+    transparent
+  );
+}
+
+.bottom {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .footer {
+    background: var(--accent-light);
+  }
+
+  .brand {
+    color: var(--text-light);
+  }
+
+  .disclaimer a {
+    color: var(--yellow-light);
+  }
+
+  .link {
+    color: var(--text-light);
+  }
+
+  .divider {
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--yellow-light),
+      transparent
+    );
+  }
+}

@@ -1,0 +1,84 @@
+@font-face {
+  font-family: runescape;
+  src: url('assets/fonts/runescape.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: runescape-small;
+  src: url('assets/fonts/runescape_small.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: runescape-bold;
+  src: url('assets/fonts/runescape_bold.ttf') format('truetype');
+}
+
+:root {
+  --bg-dark: #1e1e2e;
+  --bg-light: #eff1f5;
+
+  --accent-dark: #181825;
+  --accent-light: #e6e9ef;
+
+  --text-dark: #cdd6f4;
+  --text-light: #4c4f69;
+
+  --red-dark: #f38ba8;
+  --orange-dark: #fab387;
+  --yellow-dark: #f9e2af;
+  --green-dark: #a6e3a1;
+  --blue-dark: #89b4fa;
+  --purple-dark: #cba6f7;
+
+  --red-light: #d20f39;
+  --orange-light: #fe640b;
+  --yellow-light: #df8e1d;
+  --green-light: #40a02b;
+  --blue-light: #1e66f5;
+  --purple-light: #8839ef;
+
+  font-family: runescape, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--text-dark);
+  background-color: var(--bg-dark);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  .toast {
+    font-family: runescape-bold;
+  }
+
+  .toast svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  scrollbar-width: none;
+  scrollbar-color: var(--text-dark) transparent;
+
+  [data-sonner-toaster] {
+    bottom: calc(env(safe-area-inset-bottom) + 50px) !important;
+  }
+
+  #tv-attr-logo {
+    display: none !important;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--text-light);
+    background-color: var(--bg-light);
+
+    scrollbar-color: var(--text-light) transparent;
+  }
+}
