@@ -49,6 +49,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  will-change: transform;
 }
 
 .rangeButton:focus {
@@ -57,14 +58,6 @@
 
 .activeRange {
   background: var(--accent-dark);
-  border-radius: 8px;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .rangeButton:hover {
-    background: var(--accent-dark);
-    border-radius: 8px;
-  }
 }
 
 .rangeButton span {
@@ -73,6 +66,57 @@
 
 .rangeTitle {
   opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.chartTypeToggle {
+  position: relative;
+  overflow: hidden;
+}
+
+.toggleSwitch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  background: var(--accent-dark);
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.iconWrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  z-index: 2;
+}
+
+.iconSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.inactive {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rangeButton:hover {
+    background: var(--accent-dark);
+  }
+
+  .chartTypeToggle:hover {
+    background: none;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -80,9 +124,17 @@
     background: var(--accent-light);
   }
 
+  .toggleSwitch {
+    background: var(--accent-light);
+  }
+
   @media (hover: hover) and (pointer: fine) {
     .rangeButton:hover {
       background: var(--accent-light);
+    }
+
+    .chartTypeToggle:hover {
+      background: none;
     }
   }
 }

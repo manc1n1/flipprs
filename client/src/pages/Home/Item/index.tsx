@@ -3,7 +3,7 @@ import styles from './Item.module.css';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AreaData, HistogramData, UTCTimestamp } from 'lightweight-charts';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChartLine, ChartNoAxesCombined } from 'lucide-react';
+import { TrendingUp, TrendingUpDown } from 'lucide-react';
 
 import ItemHeader from '@/components/ItemHeader';
 import ItemDetails from '@/components/ItemDetails';
@@ -317,13 +317,36 @@ const Item = ({ itemId }: { itemId: number }) => {
                 setShowAdvancedChart((prev) => !prev);
               }}
               whileTap={{ scale: 0.95 }}
-              className={styles.rangeButton}
+              className={`${styles.rangeButton} ${styles.chartTypeToggle}`}
+              aria-label='Toggle chart type'
             >
-              {showAdvancedChart ? (
-                <ChartNoAxesCombined size={18} />
-              ) : (
-                <ChartLine size={18} />
-              )}
+              <motion.div
+                animate={{
+                  x: showAdvancedChart ? '100%' : '0%',
+                }}
+                transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                className={styles.toggleSwitch}
+              />
+
+              <div className={styles.iconWrapper}>
+                <div className={styles.iconSlot}>
+                  <TrendingUp
+                    size={18}
+                    className={
+                      !showAdvancedChart ? styles.active : styles.inactive
+                    }
+                  />
+                </div>
+
+                <div className={styles.iconSlot}>
+                  <TrendingUpDown
+                    size={18}
+                    className={
+                      showAdvancedChart ? styles.active : styles.inactive
+                    }
+                  />
+                </div>
+              </div>
             </motion.button>
           </div>
           <ItemDetails item={item} />
