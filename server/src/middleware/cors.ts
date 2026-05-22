@@ -19,6 +19,10 @@ export const corsMiddleware = cors({
       return;
     }
 
+    if (/^https:\/\/flipprs-.*\.vercel\.app$/.test(origin)) {
+      return callback(null, true);
+    }
+
     callback(new Error(`CORS blocked origin: ${origin}`));
   },
   methods: ['GET', 'POST', 'OPTIONS'],
