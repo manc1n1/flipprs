@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 
 export interface IColumn<T> {
+  id: string;
   header?: React.ReactNode;
   accessor: keyof T | ((row: T) => any);
   sortable?: boolean;
@@ -109,7 +110,7 @@ export function Table<T extends Record<string, any>>({
               {columns.map((col, colIndex) => (
                 <th
                   className={styles.th}
-                  key={`${String(col.accessor)}-${colIndex}`}
+                  key={`${col.id}-${colIndex}`}
                   onClick={() => handleSort(colIndex)}
                 >
                   <div className={styles.label}>
