@@ -15,6 +15,9 @@ export const MARQUEE_ITEMS: string[] = [
   'Red_hween',
 ];
 
+export const TAX_RATE = 0.02;
+export const MAX_TAX_RESULT = 5_000_000;
+
 export const RANGE_TO_STEP: Record<
   Exclude<TTIME_RANGE_KEY, 'MAX'>,
   TCHART_TIMESTEP

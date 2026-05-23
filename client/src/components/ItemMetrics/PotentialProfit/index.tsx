@@ -1,12 +1,12 @@
 import styles from '../ItemMetrics.module.css';
 
-import { useItemMetrics } from '@/hooks/useItemMetrics';
+import { getItemMetrics } from '@/utils/metrics';
 
 import type { TItem } from '@/types/item';
 
 export function PotentialProfit({ item }: { item: TItem }) {
   const { potentialProfitValue, potentialProfitText, isNegative } =
-    useItemMetrics(item);
+    getItemMetrics(item);
 
   return (
     <div className={styles.price}>

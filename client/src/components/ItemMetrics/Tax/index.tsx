@@ -1,9 +1,11 @@
 import styles from '../ItemMetrics.module.css';
 
-import { useTax } from '@/hooks/useTax';
+import { getItemMetrics } from '@/utils/metrics';
 
-export function Tax({ price }: { price: number }) {
-  const { formattedTax } = useTax(price);
+import type { TItem } from '@/types/item';
+
+export function Tax({ item }: { item: TItem }) {
+  const { formattedTax } = getItemMetrics(item);
 
   return (
     <div className={styles.price}>

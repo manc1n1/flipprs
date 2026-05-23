@@ -1,16 +1,16 @@
 import styles from '../ItemMetrics.module.css';
 
-import { useItemMetrics } from '@/hooks/useItemMetrics';
+import { getItemMetrics } from '@/utils/metrics';
 
 import type { TItem } from '@/types/item';
 
 export function ROI({ item }: { item: TItem }) {
-  const { marginValue, roi, isNegative } = useItemMetrics(item);
+  const { marginValue, roiText, isNegative } = getItemMetrics(item);
 
   return (
     <div
       className={
-        roi === '-%'
+        roiText === '-%'
           ? ''
           : isNegative(marginValue)
             ? styles.negative
@@ -19,7 +19,7 @@ export function ROI({ item }: { item: TItem }) {
               : styles.positive
       }
     >
-      {roi}
+      {roiText}
     </div>
   );
 }

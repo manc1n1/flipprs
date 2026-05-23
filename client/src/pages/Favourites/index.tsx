@@ -36,6 +36,8 @@ import {
 import { useFavourites } from '@/hooks/useFavourites';
 import { useFavouriteItemsQuery } from '@/hooks/useFavouriteItemsQuery';
 
+import { getItemMetrics } from '@/utils/metrics';
+
 import type { TItem } from '@/types/item';
 
 import MemberIcon from '@/assets/images/Member_icon.png';
@@ -153,9 +155,10 @@ const Favourites = () => {
   const columns = useMemo<IColumn<TItem>[]>(
     () => [
       {
+        id: 'icon',
         accessor: 'icon',
         sortable: false,
-        render: (_value, row) => (
+        render: (value, row) => (
           <Link to={`/item/${row.id}`}>
             <motion.button
               type='button'
@@ -166,7 +169,7 @@ const Favourites = () => {
               onClick={handleTableNavClick}
             >
               <WikiImage
-                icon={row.icon}
+                icon={value}
                 alt={row.name}
               />
             </motion.button>
@@ -174,6 +177,7 @@ const Favourites = () => {
         ),
       },
       {
+        id: 'name',
         header: 'Name',
         accessor: 'name',
         render: (value, row) => (
@@ -187,65 +191,83 @@ const Favourites = () => {
         ),
       },
       {
+        id: 'high',
         header: 'Buy price',
         accessor: 'high',
-        render: (_value, row) => (
+        render: (value) => (
           <div className={styles.price}>
-            <PriceChange value={row.high} />
+            <PriceChange value={value} />
           </div>
         ),
       },
       {
+        id: 'highTime',
         header: 'Buy time',
-        accessor: (row) => -(row.highTime ?? 0),
-        render: (_value, row) => <LastUpdateTime timestamp={row.highTime} />,
+        accessor: (row) => row.highTime ?? 0,
+        render: (value) => <LastUpdateTime timestamp={value} />,
       },
       {
+        id: 'low',
         header: 'Sell price',
         accessor: 'low',
-        render: (_value, row) => (
+        render: (value) => (
           <div className={styles.price}>
-            <PriceChange value={row.low} />
+            <PriceChange value={value} />
           </div>
         ),
       },
       {
+        id: 'lowTime',
         header: 'Sell time',
-        accessor: (row) => -(row.lowTime ?? 0),
-        render: (_value, row) => <LastUpdateTime timestamp={row.lowTime} />,
+        accessor: (row) => row.lowTime ?? 0,
+        render: (value) => <LastUpdateTime timestamp={value} />,
       },
       {
+        id: 'margin',
         header: 'Margin',
-        accessor: (row) => (row.high ?? 0) - (row.low ?? 0),
+        accessor: (row) => {
+          const { marginValue } = getItemMetrics(row);
+
+          return marginValue;
+        },
         render: (_value, row) => <Margin item={row} />,
       },
       {
+        id: 'roi',
         header: 'ROI',
         accessor: (row) => {
-          const marginValue = (row.high ?? 0) - (row.low ?? 0);
-          return parseFloat(((marginValue / (row.low ?? 0)) * 100).toFixed(2));
+          const { roiValue } = getItemMetrics(row);
+
+          return roiValue;
         },
         render: (_value, row) => <ROI item={row} />,
       },
       {
+        id: 'volume',
         header: 'Volume',
         accessor: 'volume',
         render: (_value, row) => <Volume volume={row.volume} />,
       },
       {
+        id: 'limit',
         header: 'Buy limit',
         accessor: 'limit',
         render: (_value, row) => <BuyLimit item={row} />,
       },
       {
+        id: 'potentialProfit',
         header: 'Potential profit',
         accessor: (row) => {
-          const marginValue = (row.high ?? 0) - (row.low ?? 0);
-          return marginValue * (row.limit ?? 0);
+          const { potentialProfitValue } = getItemMetrics(row);
+
+          if (potentialProfitValue === 0) return null;
+
+          return potentialProfitValue;
         },
         render: (_value, row) => <PotentialProfit item={row} />,
       },
       {
+        id: 'members',
         header: 'Members',
         accessor: 'members',
         render: (_value, row) => (
@@ -268,8 +290,13 @@ const Favourites = () => {
           </div>
         ),
       },
-      { header: 'Item ID', accessor: 'id' },
       {
+        id: 'id',
+        header: 'Item ID',
+        accessor: 'id',
+      },
+      {
+        id: 'favourite',
         accessor: 'id',
         sortable: false,
         render: (_value, row) => (

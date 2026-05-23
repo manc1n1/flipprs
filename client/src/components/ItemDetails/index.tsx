@@ -56,7 +56,7 @@ const ItemDetails = ({ item }: { item: TItem }) => {
         <div>
           <span className={styles.title}>Tax (2%)</span>
           <span className={styles.span}>
-            <Tax price={item.high} />
+            <Tax item={item} />
           </span>
         </div>
         <div>
