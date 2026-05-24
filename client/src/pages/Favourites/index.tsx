@@ -37,6 +37,7 @@ import { useFavourites } from '@/hooks/useFavourites';
 import { useFavouriteItemsQuery } from '@/hooks/useFavouriteItemsQuery';
 
 import { getItemMetrics } from '@/utils/metrics';
+import { formatCompactNumber } from '@/utils/formatters';
 
 import type { TItem } from '@/types/item';
 
@@ -198,7 +199,10 @@ const Favourites = () => {
         align: 'right',
         render: (value) => (
           <div className={styles.price}>
-            <PriceChange value={value} />
+            <PriceChange
+              value={value}
+              formatter={formatCompactNumber}
+            />
           </div>
         ),
       },
@@ -216,7 +220,10 @@ const Favourites = () => {
         align: 'right',
         render: (value) => (
           <div className={styles.price}>
-            <PriceChange value={value} />
+            <PriceChange
+              value={value}
+              formatter={formatCompactNumber}
+            />
           </div>
         ),
       },
