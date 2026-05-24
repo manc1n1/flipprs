@@ -1,5 +1,7 @@
 import { MAX_TAX_RESULT, TAX_RATE } from '@/constants';
 
+import { formatCompactNumber } from './formatters';
+
 import type { TItem } from '@/types/item';
 
 export interface IItemMetrics {
@@ -31,12 +33,12 @@ export function getItemMetrics(item?: TItem | null): IItemMetrics {
   const potentialProfitValue = marginValue * limit;
 
   const marginText = hasPrices
-    ? marginValue.toLocaleString()
-    : (-tax).toLocaleString();
+    ? formatCompactNumber(marginValue)
+    : formatCompactNumber(-tax);
 
   const potentialProfitText =
     hasPrices && item?.limit != null
-      ? potentialProfitValue.toLocaleString()
+      ? formatCompactNumber(potentialProfitValue)
       : '-';
 
   const roiValue = hasPrices && low > 0 ? (marginValue / low) * 100 : null;
@@ -49,7 +51,7 @@ export function getItemMetrics(item?: TItem | null): IItemMetrics {
   return {
     rawTax,
     tax,
-    formattedTax: high != null ? tax.toLocaleString() : '-',
+    formattedTax: high != null ? formatCompactNumber(tax) : '-',
     marginValue,
     potentialProfitValue,
     marginText,

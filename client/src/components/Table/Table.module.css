@@ -42,7 +42,7 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  padding: 1rem 0;
+  padding: 1rem 0.5rem;
   background: var(--accent-dark);
   border-bottom: 1px solid var(--purple-dark);
 }
