@@ -14,6 +14,7 @@ export interface IColumn<T> {
   header?: React.ReactNode;
   accessor: keyof T | ((row: T) => any);
   sortable?: boolean;
+  align?: 'left' | 'center' | 'right';
   render?: (value: any, row: T) => React.ReactNode;
 }
 
@@ -24,13 +25,16 @@ interface ISortConfig {
 
 interface ITableProps<T> {
   columns: IColumn<T>[];
-  data: T[];
+  data?: T[];
+  variant?: 'default' | 'favourites';
 }
 
 export function Table<T extends Record<string, any>>({
   columns,
   data,
+  variant = 'default',
 }: ITableProps<T>) {
+  const isFavouriteTable = variant === 'favourites';
   const [sortConfig, setSortConfig] = useState<ISortConfig | null>(null);
 
   const getValue = useCallback(
@@ -40,7 +44,9 @@ export function Table<T extends Record<string, any>>({
     [],
   );
 
-  const sortedData = useMemo(() => {
+  const sortedData = useMemo<T[]>(() => {
+    if (!data) return [];
+
     if (!sortConfig) return data;
 
     const { columnIndex, direction } = sortConfig;
@@ -102,15 +108,19 @@ export function Table<T extends Record<string, any>>({
   };
 
   return (
-    <div className={styles.tableContainer}>
-      <div className={styles.scrollWrapper}>
+    <div
+      className={`${styles.tableContainer} ${isFavouriteTable ? styles.favTableContainer : ''}`}
+    >
+      <div
+        className={`${styles.scrollWrapper} ${!isFavouriteTable ? styles.scrollWrapperX : ''}`}
+      >
         <table className={styles.table}>
           <thead>
             <tr className={styles.tableHeaderRow}>
               {columns.map((col, colIndex) => (
                 <th
                   className={styles.th}
-                  key={`${col.id}-${colIndex}`}
+                  key={col.id}
                   onClick={() => handleSort(colIndex)}
                 >
                   <div className={styles.label}>
@@ -126,9 +136,9 @@ export function Table<T extends Record<string, any>>({
               {sortedData.map((row, rowIndex) => (
                 <motion.tr
                   layout
-                  layoutId={`row-${row.id}`}
+                  layoutId={`row-${row.id}-${rowIndex}`}
                   className={styles.tableBodyRow}
-                  key={row.id}
+                  key={`${row.id}-${rowIndex}`}
                   transition={{
                     layout: {
                       type: 'tween',
@@ -137,16 +147,20 @@ export function Table<T extends Record<string, any>>({
                     },
                   }}
                 >
-                  {columns.map((col, colIndex) => {
+                  {columns.map((col) => {
                     const value = getValue(row, col.accessor);
                     return (
                       <td
                         className={styles.td}
-                        key={`${rowIndex}-${colIndex}`}
+                        key={`${row.id}-${col.id}`}
                       >
-                        {col.render
-                          ? col.render(value, row)
-                          : (value as React.ReactNode)}
+                        <div
+                          className={`${styles.cellInner} ${styles[col.align ?? 'center']}`}
+                        >
+                          {col.render
+                            ? col.render(value, row)
+                            : (value as React.ReactNode)}
+                        </div>
                       </td>
                     );
                   })}

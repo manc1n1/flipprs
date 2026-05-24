@@ -8,6 +8,7 @@ import { TrendingUp, TrendingUpDown } from 'lucide-react';
 import ItemHeader from '@/components/ItemHeader';
 import ItemDetails from '@/components/ItemDetails';
 import { Chart } from '@/components/Chart';
+import RecentTradesTable from '@/components/RecentTradesTable';
 
 import { useItemDetailQuery } from '@/hooks/useItemDetailQuery';
 import { useTimeseriesQuery } from '@/hooks/useTimeseriesQuery';
@@ -238,6 +239,18 @@ const Item = ({ itemId }: { itemId: number }) => {
     setRange(k);
   };
 
+  const recentTrades = useMemo(() => {
+    if (!timeseries) return [];
+
+    const now = Math.floor(Date.now() / 1000);
+    const last24Hours = now - 60 * 60 * 24;
+
+    return timeseries
+      .filter((ts) => ts.timestamp >= last24Hours)
+      .slice(-10)
+      .reverse();
+  }, [timeseries]);
+
   return (
     <>
       {item && (
@@ -350,6 +363,12 @@ const Item = ({ itemId }: { itemId: number }) => {
             </motion.button>
           </div>
           <ItemDetails item={item} />
+          {recentTrades.length > 0 && (
+            <>
+              <div className={styles.sectionTitle}>Recent trades</div>
+              <RecentTradesTable timeseries={recentTrades} />
+            </>
+          )}
         </div>
       )}
     </>
