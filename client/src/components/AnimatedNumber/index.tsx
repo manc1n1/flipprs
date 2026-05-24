@@ -5,16 +5,20 @@ type AnimatedNumberProps = {
   value: number | null;
   duration?: number;
   className?: string;
+  formatter?: (value: number) => string;
 };
+
+const defaultFormatter = (value: number) => value.toLocaleString();
 
 export function AnimatedNumber({
   value,
   duration = 0.4,
   className,
+  formatter = defaultFormatter,
 }: AnimatedNumberProps) {
   const motionValue = useMotionValue(value ?? 0);
   const [displayValue, setDisplayValue] = useState(
-    value !== null ? value.toLocaleString() : '-',
+    value !== null ? formatter(value) : '-',
   );
 
   useEffect(() => {
@@ -28,12 +32,12 @@ export function AnimatedNumber({
       duration,
       ease: 'easeOut',
       onUpdate: (latest) => {
-        setDisplayValue(Math.round(latest).toLocaleString());
+        setDisplayValue(formatter(Math.round(latest)));
       },
     });
 
     return () => controls.stop();
-  }, [duration, motionValue, value]);
+  }, [duration, formatter, motionValue, value]);
 
   return <span className={className}>{displayValue}</span>;
 }

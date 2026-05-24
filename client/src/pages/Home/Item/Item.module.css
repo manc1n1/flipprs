@@ -109,6 +109,13 @@
   transition: opacity 0.2s ease;
 }
 
+.sectionTitle {
+  opacity: 0.8;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .rangeButton:hover {
     background: var(--accent-dark);

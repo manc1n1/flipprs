@@ -180,6 +180,7 @@ const Favourites = () => {
         id: 'name',
         header: 'Name',
         accessor: 'name',
+        align: 'left',
         render: (value, row) => (
           <Link
             to={`/item/${row.id}`}
@@ -194,6 +195,7 @@ const Favourites = () => {
         id: 'high',
         header: 'Buy price',
         accessor: 'high',
+        align: 'right',
         render: (value) => (
           <div className={styles.price}>
             <PriceChange value={value} />
@@ -203,6 +205,7 @@ const Favourites = () => {
       {
         id: 'highTime',
         header: 'Buy time',
+        align: 'right',
         accessor: (row) => row.highTime ?? 0,
         render: (value) => <LastUpdateTime timestamp={value} />,
       },
@@ -210,6 +213,7 @@ const Favourites = () => {
         id: 'low',
         header: 'Sell price',
         accessor: 'low',
+        align: 'right',
         render: (value) => (
           <div className={styles.price}>
             <PriceChange value={value} />
@@ -219,12 +223,14 @@ const Favourites = () => {
       {
         id: 'lowTime',
         header: 'Sell time',
+        align: 'right',
         accessor: (row) => row.lowTime ?? 0,
         render: (value) => <LastUpdateTime timestamp={value} />,
       },
       {
         id: 'margin',
         header: 'Margin',
+        align: 'right',
         accessor: (row) => {
           const { marginValue } = getItemMetrics(row);
 
@@ -235,6 +241,7 @@ const Favourites = () => {
       {
         id: 'roi',
         header: 'ROI',
+        align: 'right',
         accessor: (row) => {
           const { roiValue } = getItemMetrics(row);
 
@@ -246,17 +253,20 @@ const Favourites = () => {
         id: 'volume',
         header: 'Volume',
         accessor: 'volume',
+        align: 'right',
         render: (_value, row) => <Volume volume={row.volume} />,
       },
       {
         id: 'limit',
         header: 'Buy limit',
         accessor: 'limit',
+        align: 'right',
         render: (_value, row) => <BuyLimit item={row} />,
       },
       {
         id: 'potentialProfit',
         header: 'Potential profit',
+        align: 'right',
         accessor: (row) => {
           const { potentialProfitValue } = getItemMetrics(row);
 
@@ -294,6 +304,7 @@ const Favourites = () => {
         id: 'id',
         header: 'Item ID',
         accessor: 'id',
+        align: 'right',
       },
       {
         id: 'favourite',
@@ -347,6 +358,7 @@ const Favourites = () => {
       <Table
         columns={columns}
         data={favItems}
+        variant='favourites'
       />
       <FloatingActionButton
         actions={actions}

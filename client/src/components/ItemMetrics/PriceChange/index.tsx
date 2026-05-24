@@ -4,7 +4,13 @@ import { AnimatedNumber } from '@/components/AnimatedNumber';
 
 import { usePriceChange } from '@/hooks/usePriceChange';
 
-export function PriceChange({ value }: { value: number }) {
+export function PriceChange({
+  value,
+  formatter,
+}: {
+  value: number;
+  formatter?: (value: number) => string;
+}) {
   const priceChange = usePriceChange(value);
   const className =
     priceChange === 'positive'
@@ -18,6 +24,7 @@ export function PriceChange({ value }: { value: number }) {
       <AnimatedNumber
         value={value}
         className={className}
+        formatter={formatter}
       />
       <span className={styles.currency}>GP</span>
     </div>
