@@ -640,12 +640,12 @@ export const Chart = ({
 
             <div class="${styles.tooltipRow}">
               <span>Buy volume</span>
-              <strong>${formatNumber(buyVolume ?? 0)}</strong>
+              <strong>${(buyVolume ?? 0 > 0) ? formatNumber(buyVolume ?? 0) : '-'}</strong>
             </div>
 
             <div class="${styles.tooltipRow}">
               <span>Sell volume</span>
-              <strong>${formatNumber(Math.abs(sellVolume ?? 0))}</strong>
+              <strong>${(sellVolume ?? 0 > 0) ? formatNumber(Math.abs(sellVolume ?? 0)) : '-'}</strong>
             </div>
           `
           : `

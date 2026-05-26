@@ -19,6 +19,14 @@
   opacity: 0.8;
 }
 
+.bold {
+  font-family: runescape-bold;
+}
+
+.percentSign {
+  font-family: runescape;
+}
+
 @media (prefers-color-scheme: light) {
   .negative {
     color: var(--red-light);
