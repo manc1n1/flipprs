@@ -79,6 +79,10 @@ const Item = ({ itemId }: { itemId: number }) => {
     timestep,
     itemId,
   );
+  const { timeseries: recentTradesTimeseries } = useTimeseriesQuery(
+    RANGE_TO_STEP['1D'],
+    itemId,
+  );
   const showHistory = range === 'MAX' && !!itemId;
   const historyCacheRef = useRef<Record<number, AreaData<UTCTimestamp>[]>>({});
   const { data: historyTimeseries, isLoading: loadingHistoryTs } =
@@ -245,16 +249,16 @@ const Item = ({ itemId }: { itemId: number }) => {
   };
 
   const recentTrades = useMemo(() => {
-    if (!timeseries) return [];
+    if (!recentTradesTimeseries) return [];
 
     const now = Math.floor(Date.now() / 1000);
     const last24Hours = now - 60 * 60 * 24;
 
-    return timeseries
+    return recentTradesTimeseries
       .filter((ts) => ts.timestamp >= last24Hours)
       .slice(-10)
       .reverse();
-  }, [timeseries]);
+  }, [recentTradesTimeseries]);
 
   useFavicon(buildIconUrl(item?.icon));
 
