@@ -13,6 +13,11 @@ import RecentTradesTable from '@/components/RecentTradesTable';
 import { useItemDetailQuery } from '@/hooks/useItemDetailQuery';
 import { useTimeseriesQuery } from '@/hooks/useTimeseriesQuery';
 import { useHistoryTimeseriesQuery } from '@/hooks/useHistoryTimeseriesQuery';
+import { useFavicon } from '@/hooks/useFavicon';
+import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+
+import { formatCompactNumber } from '@/utils/formatters';
+import { buildIconUrl } from '@/utils/buildIconUrl';
 
 import type { TAChart, TTIME_RANGE_KEY } from '@/types/chart';
 import type { TItem, TPriceChangeSummary } from '@/types/item';
@@ -250,6 +255,14 @@ const Item = ({ itemId }: { itemId: number }) => {
       .slice(-10)
       .reverse();
   }, [timeseries]);
+
+  useFavicon(buildIconUrl(item?.icon));
+
+  useDocumentTitle(
+    item?.name
+      ? `${item.name} - ${formatCompactNumber(getMostRecentItemTrade(item).price, 2)} gp | flipp.rs`
+      : 'flipp.rs',
+  );
 
   return (
     <>

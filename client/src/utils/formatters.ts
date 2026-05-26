@@ -9,11 +9,14 @@ export function formatTimestamp(value: UTCTimestamp): string {
   });
 }
 
-export function formatCompactNumber(value: number | null): string {
+export function formatCompactNumber(
+  value: number | null,
+  maximumFractionDigits = 3,
+): string {
   if (value == null) return '-';
 
   return Intl.NumberFormat(navigator.language, {
     notation: 'compact',
-    maximumFractionDigits: 3,
+    maximumFractionDigits,
   }).format(value);
 }
