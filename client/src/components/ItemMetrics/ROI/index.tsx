@@ -10,8 +10,8 @@ export function ROI({ item }: { item: TItem }) {
   return (
     <div
       className={
-        roiText === '-%'
-          ? ''
+        roiText === '-'
+          ? styles.bold
           : isNegative(marginValue)
             ? styles.negative
             : marginValue === 0
@@ -20,6 +20,7 @@ export function ROI({ item }: { item: TItem }) {
       }
     >
       {roiText}
+      <span className={styles.percentSign}>%</span>
     </div>
   );
 }

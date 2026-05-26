@@ -44,20 +44,20 @@ export function getItemMetrics(item?: TItem | null): IItemMetrics {
   const roiValue = hasPrices && low > 0 ? (marginValue / low) * 100 : null;
 
   const roiText =
-    hasPrices && low > 0 ? `${((marginValue / low) * 100).toFixed(2)}%` : '-%';
+    hasPrices && low > 0 ? `${((marginValue / low) * 100).toFixed(2)}` : '-';
 
   const isNegative = (value: number) => value < 0;
 
   return {
     rawTax,
     tax,
-    formattedTax: high != null ? formatCompactNumber(tax) : '-',
+    formattedTax: high != null && tax !== 0 ? formatCompactNumber(tax) : '-',
     marginValue,
     potentialProfitValue,
-    marginText,
-    potentialProfitText,
+    marginText: marginValue === 0 ? '-' : marginText,
+    potentialProfitText: potentialProfitValue === 0 ? '-' : potentialProfitText,
     roiValue,
-    roiText,
+    roiText: roiValue === 0 ? '-' : roiText,
     isNegative,
   };
 }

@@ -13,9 +13,11 @@ export function Margin({ item }: { item: TItem }) {
         className={
           isNegative(marginValue)
             ? styles.negative
-            : marginValue === 0
-              ? ''
-              : styles.positive
+            : marginText === '-'
+              ? styles.bold
+              : marginValue === 0
+                ? ''
+                : styles.positive
         }
       >
         {marginText}

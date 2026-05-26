@@ -9,7 +9,9 @@ export function Tax({ item }: { item: TItem }) {
 
   return (
     <div className={styles.price}>
-      <div className={styles.negative}>{formattedTax}</div>
+      <div className={formattedTax === '-' ? styles.bold : styles.negative}>
+        {formattedTax}
+      </div>
       <span className={styles.currency}>GP</span>
     </div>
   );
