@@ -6,8 +6,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { TrendingUp, TrendingUpDown } from 'lucide-react';
 
 import ItemHeader from '@/components/ItemHeader';
-import ItemDetails from '@/components/ItemDetails';
 import { Chart } from '@/components/Chart';
+import ItemDetails from '@/components/ItemDetails';
+import BuySellPressureBar from '@/components/BuySellPressureBar';
 import RecentTradesTable from '@/components/RecentTradesTable';
 
 import { useItemDetailQuery } from '@/hooks/useItemDetailQuery';
@@ -34,17 +35,18 @@ function getMostRecentItemTrade(item: TItem): {
     : { price: item.low, timestamp: item.lowTime, type: 'low' };
 }
 
-function getRangeFilteredSeries(
-  series: AreaData<UTCTimestamp>[],
+function getRangeFilteredSeries<T>(
+  series: T[],
   range: TTIME_RANGE_KEY,
-): AreaData<UTCTimestamp>[] {
+  getTime: (ts: T) => number,
+): T[] {
   if (range === 'MAX') return series;
 
   const seconds = RANGE_TO_SECONDS[range];
   const now = Math.floor(Date.now() / 1000);
   const from = now - seconds;
 
-  return series.filter((ts) => Number(ts.time) >= from);
+  return series.filter((ts) => getTime(ts) >= from);
 }
 
 function getPriceChangeSummary(
@@ -217,7 +219,9 @@ const Item = ({ itemId }: { itemId: number }) => {
   const rawPriceChangeSummary = useMemo(() => {
     if (!item) return null;
 
-    const rangeSeries = getRangeFilteredSeries(chartData, range);
+    const rangeSeries = getRangeFilteredSeries(chartData, range, (ts) =>
+      Number(ts.time),
+    );
 
     return getPriceChangeSummary(item, rangeSeries);
   }, [chartData, item, range]);
@@ -259,6 +263,14 @@ const Item = ({ itemId }: { itemId: number }) => {
       .slice(-10)
       .reverse();
   }, [recentTradesTimeseries]);
+
+  const pressureTimeseries = useMemo(() => {
+    if (showHistory) return [];
+
+    return getRangeFilteredSeries(timeseries ?? [], range, (ts) =>
+      Number(ts.timestamp),
+    );
+  }, [range, showHistory, timeseries]);
 
   useFavicon(buildIconUrl(item?.icon));
 
@@ -379,6 +391,9 @@ const Item = ({ itemId }: { itemId: number }) => {
               </div>
             </motion.button>
           </div>
+          {!showHistory && (
+            <BuySellPressureBar timeseries={pressureTimeseries} />
+          )}
           <ItemDetails item={item} />
           {recentTrades.length > 0 && (
             <>
