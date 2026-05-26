@@ -8,8 +8,6 @@ export function PotentialProfit({ item }: { item: TItem }) {
   const { potentialProfitValue, potentialProfitText, isNegative } =
     getItemMetrics(item);
 
-  console.log(potentialProfitValue);
-
   return (
     <div className={styles.price}>
       <div
