@@ -1,5 +1,7 @@
 import styles from './BuySellPressureBar.module.css';
 
+import { Info } from 'lucide-react';
+
 import { formatCompactNumber } from '@/utils/formatters';
 
 import type { TTimeseries } from '@/types/chart';
@@ -20,7 +22,30 @@ export default function BuySellPressureBar({
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Buy / Sell Pressure</div>
+      <div className={styles.title}>
+        <span className={styles.titleText}>Buy / Sell Pressure</span>
+        <div className={styles.infoWrapper}>
+          <Info
+            className={styles.infoIcon}
+            size={16}
+          />
+
+          <div
+            role='tooltip'
+            className={styles.tooltip}
+          >
+            <span className={styles.tooltipTitle}>Pressure</span>:
+            <div>Buy = high-price volume</div>
+            <div>Sell = low-price volume</div>
+            <br />
+            <span className={styles.tooltipTitle}>Ratio</span>:
+            <div>&gt; 1 = stronger buying</div>
+            <div className={styles.bullet}>- Stronger demand</div>
+            <div>&lt; 1 = stronger selling</div>
+            <div className={styles.bullet}>- More supply than demand</div>
+          </div>
+        </div>
+      </div>
 
       <div className={styles.barRow}>
         <div className={styles.buyPercent}>{Math.round(buyPercent)}%</div>
