@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Squeeze as Hamburger } from 'hamburger-react';
 import { motion } from 'framer-motion';
-import { Heart, Skull } from 'lucide-react';
+import { Heart, House, Skull } from 'lucide-react';
 
 import { Autocomplete } from '@/components/Autocomplete';
 import Logo from '@/components/Logo';
@@ -78,12 +78,6 @@ const Header = () => {
     });
   };
 
-  const scrollToTopWithHaptic = () => {
-    requestAnimationFrame(() => {
-      scrollToTop();
-    });
-  };
-
   const toggleMobileMenu = () => {
     setOpen(!isOpen);
     scrollToTop();
@@ -118,11 +112,25 @@ const Header = () => {
         <Link
           className={styles.brand}
           to='/'
-          onClick={scrollToTopWithHaptic}
+          onClick={scrollToTop}
         >
           <Logo />
         </Link>
         <nav className={`${styles.nav} ${isOpen ? styles.navOpen : ''}`}>
+          <Link
+            className={`${styles.link} ${styles.mobileOnly}`}
+            to='/'
+            onClick={toggleMobileMenu}
+          >
+            <motion.button
+              className={styles.navItem}
+              type='button'
+              whileTap={{ scale: 0.99 }}
+            >
+              <House size={22} />
+              <span className={styles.navItemLabel}>Home</span>
+            </motion.button>
+          </Link>
           <Link
             className={styles.link}
             to='/favourites'
@@ -133,10 +141,7 @@ const Header = () => {
               type='button'
               whileTap={{ scale: 0.99 }}
             >
-              <Heart
-                className={styles.heartIcon}
-                size={22}
-              />
+              <Heart size={22} />
               <span className={styles.navItemLabel}>Favourites</span>
             </motion.button>
           </Link>
