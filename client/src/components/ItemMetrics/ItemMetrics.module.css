@@ -25,6 +25,7 @@
 
 .percentSign {
   font-family: runescape;
+  opacity: 0.8;
 }
 
 @media (prefers-color-scheme: light) {

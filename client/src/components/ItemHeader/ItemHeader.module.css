@@ -57,7 +57,7 @@
   font-family: runescape-bold;
 }
 
-.priceChange {
+.priceChangeInfoRow {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -72,10 +72,24 @@
   color: var(--green-dark);
 }
 
+.priceChange {
+  display: flex;
+  transform: translateY(1px);
+}
+
+.trendIcon {
+  transform: translateY(1px);
+}
+
+.range {
+  transform: translateY(1px);
+}
+
 .timestamp {
   font-family: runescape-small;
   font-size: 1rem;
   opacity: 0.8;
+  transform: translateY(3px);
 }
 
 .itemId {

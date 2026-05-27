@@ -1,11 +1,12 @@
 import styles from '../ItemMetrics.module.css';
 
+import { formatCompactNumber } from '@/utils/formatters';
 import { getItemMetrics } from '@/utils/metrics';
 
 import type { TItem } from '@/types/item';
 
 export function ROI({ item }: { item: TItem }) {
-  const { marginValue, roiText, isNegative } = getItemMetrics(item);
+  const { marginValue, roiValue, roiText, isNegative } = getItemMetrics(item);
 
   return (
     <div
@@ -19,7 +20,8 @@ export function ROI({ item }: { item: TItem }) {
               : styles.positive
       }
     >
-      {roiText}
+      {roiValue && roiValue > 0 ? '+' : ''}
+      {roiValue === 0 ? roiText : formatCompactNumber(roiValue, 2)}
       <span className={styles.percentSign}>%</span>
     </div>
   );

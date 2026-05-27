@@ -16,14 +16,15 @@ import { ReactComponent as OSRSWikiLogo } from '@/assets/images/osrswiki.svg';
 import { ReactComponent as OSRS } from '@/assets/images/osrs.svg';
 
 import WikiImage from '@/components/WikiImage';
-import { LastUpdateTime } from '../ItemMetrics/LastUpdateTime';
+import { LastUpdateTime } from '@/components/ItemMetrics/LastUpdateTime';
+import { PriceChange } from '@/components/ItemMetrics/PriceChange';
+import { Chip } from '@/components/Chip';
 
 import { useFavourites } from '@/hooks/useFavourites';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 
 import type { TItem, TPriceChangeSummary } from '@/types/item';
 import type { TTIME_RANGE_KEY } from '@/types/chart';
-import { PriceChange } from '../ItemMetrics/PriceChange';
 
 const ItemHeader = memo(function ItemHeader({
   item,
@@ -99,7 +100,7 @@ const ItemHeader = memo(function ItemHeader({
         </span>
       </div>
       <span
-        className={`${styles.priceChange} ${
+        className={`${styles.priceChangeInfoRow} ${
           priceChangeSummary && priceChangeSummary.valueChange > 0
             ? styles.positive
             : priceChangeSummary && priceChangeSummary.valueChange < 0
@@ -109,12 +110,12 @@ const ItemHeader = memo(function ItemHeader({
       >
         {priceChangeSummary ? (
           <>
-            <div>
+            <div className={styles.priceChange}>
               {priceChangeSummary.valueChange >= 0 ? '+' : ''}
-              {priceChangeSummary.valueChange.toLocaleString()}
+              <PriceChange value={priceChangeSummary.valueChange} />
             </div>
-            <div>{`(${priceChangeSummary.percentChange.toFixed(2)}%)`}</div>
-            <div>
+            <Chip value={priceChangeSummary.percentChange} />
+            <div className={styles.trendIcon}>
               {priceChangeSummary.valueChange > 0 ? (
                 <TrendingUp />
               ) : priceChangeSummary.valueChange < 0 ? (
@@ -123,7 +124,7 @@ const ItemHeader = memo(function ItemHeader({
                 <Equal />
               )}
             </div>
-            <div>{range}</div>
+            <div className={styles.range}>{range}</div>
           </>
         ) : (
           <></>
