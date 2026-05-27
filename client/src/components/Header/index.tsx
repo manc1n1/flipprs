@@ -71,16 +71,15 @@ const Header = () => {
     };
   }, [isOpen]);
 
-  const scrollToTop = () => {
+  useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-  };
+  }, [pathname]);
 
   const toggleMobileMenu = () => {
-    setOpen(!isOpen);
-    scrollToTop();
+    setOpen((prev) => !prev);
   };
 
   const handleSelect = (item: TSearchItem) => {
@@ -112,7 +111,6 @@ const Header = () => {
         <Link
           className={styles.brand}
           to='/'
-          onClick={scrollToTop}
         >
           <Logo />
         </Link>

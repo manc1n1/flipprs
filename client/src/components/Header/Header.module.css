@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   top: 0;
-  height: 80px;
+  height: 70px;
   background-color: var(--accent-dark);
   border-bottom: 1px solid var(--purple-dark);
   z-index: 1000;
@@ -97,10 +97,6 @@
   outline: none;
 }
 
-.mobileOnly {
-  display: none;
-}
-
 @media (hover: hover) and (pointer: fine) {
   .navItem:hover {
     background: var(--bg-dark);
@@ -137,7 +133,7 @@
 
   .nav {
     position: absolute;
-    top: 80px;
+    top: 70px;
     left: 0;
     display: block;
     flex-direction: column;

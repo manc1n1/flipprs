@@ -24,8 +24,8 @@ const footerLinks: FooterSection[] = [
   {
     label: 'Tools',
     links: [
-      { title: 'Favourites', href: 'favourites', icon: <Heart /> },
-      { title: `Death's Coffer`, href: 'deaths-coffer', icon: <Skull /> },
+      { title: 'Favourites', href: '/favourites', icon: <Heart /> },
+      { title: `Death's Coffer`, href: '/deaths-coffer', icon: <Skull /> },
     ],
   },
   {
@@ -52,7 +52,12 @@ const footerLinks: FooterSection[] = [
 
 function Footer() {
   const handleFooterNavClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
   };
 
   return (
@@ -114,18 +119,34 @@ function Footer() {
               >
                 <h3 className={styles.sectionTitle}>{section.label}</h3>
                 <ul className={styles.linkList}>
-                  {section.links.map((link) => (
-                    <li key={link.title}>
-                      <Link
-                        className={styles.link}
-                        to={link.href}
-                        onClick={handleFooterNavClick}
-                      >
-                        {link.icon}
-                        <span>{link.title}</span>
-                      </Link>
-                    </li>
-                  ))}
+                  {section.links.map((link) => {
+                    const isExternal = link.href.startsWith('http');
+
+                    return (
+                      <li key={link.title}>
+                        {isExternal ? (
+                          <a
+                            className={styles.link}
+                            href={link.href}
+                            target='_blank'
+                            rel='noreferrer noopener'
+                          >
+                            {link.icon}
+                            <span>{link.title}</span>
+                          </a>
+                        ) : (
+                          <Link
+                            className={styles.link}
+                            to={link.href}
+                            onClick={handleFooterNavClick}
+                          >
+                            {link.icon}
+                            <span>{link.title}</span>
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </AnimatedContainer>
             ))}
