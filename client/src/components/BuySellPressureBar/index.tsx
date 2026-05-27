@@ -84,7 +84,7 @@ export default function BuySellPressureBar({
             {ratio ? (
               <>
                 <span className={styles.buyValue}>
-                  {formatCompactNumber(ratio, 1)}
+                  {formatCompactNumber(ratio, 2)}
                 </span>
                 <span>:</span>
                 <span className={styles.sellValue}>1</span>

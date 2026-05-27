@@ -51,7 +51,7 @@ export function getItemMetrics(item?: TItem | null): IItemMetrics {
   return {
     rawTax,
     tax,
-    formattedTax: high != null && tax !== 0 ? formatCompactNumber(tax) : '-',
+    formattedTax: high != null && tax !== 0 ? formatCompactNumber(-tax) : '-',
     marginValue,
     potentialProfitValue,
     marginText: marginValue === 0 ? '-' : marginText,

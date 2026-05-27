@@ -21,6 +21,7 @@ export function PotentialProfit({ item }: { item: TItem }) {
                 : styles.positive
         }
       >
+        {potentialProfitValue > 0 ? '+' : ''}
         {potentialProfitText}
       </div>
       <span className={styles.currency}>GP</span>

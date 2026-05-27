@@ -20,6 +20,7 @@ export function Margin({ item }: { item: TItem }) {
                 : styles.positive
         }
       >
+        {marginValue > 0 ? '+' : ''}
         {marginText}
       </div>
       <span className={styles.currency}>GP</span>
