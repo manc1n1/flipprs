@@ -4,6 +4,7 @@
   align-items: center;
   width: min(100%, 550px);
   padding: 2rem;
+  margin-top: 3rem;
   box-sizing: border-box;
 }
 
