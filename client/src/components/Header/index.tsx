@@ -14,7 +14,7 @@ import { useItemsQuery } from '@/hooks/useItemsQuery';
 
 import type { TSearchItem } from '@/types/item';
 
-const AUTOCOMPLETE_SCROLL_THRESHOLD = 150;
+const AUTOCOMPLETE_SCROLL_THRESHOLD = 195;
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
