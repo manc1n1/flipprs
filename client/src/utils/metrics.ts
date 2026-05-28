@@ -12,7 +12,7 @@ export interface IItemMetrics {
   potentialProfitValue: number;
   marginText: string;
   potentialProfitText: string;
-  roiValue: number | null;
+  roiValue: number;
   roiText: string;
   isNegative: (value: number) => boolean;
 }
@@ -41,7 +41,7 @@ export function getItemMetrics(item?: TItem | null): IItemMetrics {
       ? formatCompactNumber(potentialProfitValue)
       : '-';
 
-  const roiValue = hasPrices && low > 0 ? (marginValue / low) * 100 : null;
+  const roiValue = hasPrices && low > 0 ? (marginValue / low) * 100 : 0;
 
   const roiText =
     hasPrices && low > 0 ? `${((marginValue / low) * 100).toFixed(2)}` : '-';
