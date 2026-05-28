@@ -21,7 +21,7 @@ export function ROI({ item }: { item: TItem }) {
       }
     >
       {roiValue && roiValue > 0 ? '+' : ''}
-      {roiValue === 0 ? roiText : formatCompactNumber(roiValue, 2)}
+      {roiValue === 0 ? roiText : formatCompactNumber(roiValue)}
       <span className={styles.percentSign}>%</span>
     </div>
   );

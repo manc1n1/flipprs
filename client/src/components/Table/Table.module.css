@@ -6,7 +6,7 @@
 }
 
 .favTableContainer {
-  height: calc(100dvh - 250px);
+  height: calc(100vh - 250px);
 }
 
 .scrollWrapper {
@@ -20,6 +20,7 @@
   overscroll-behavior: contain;
   touch-action: pan-x pan-y;
   border: 1px solid var(--purple-dark);
+  border-radius: 0 0 1rem 1rem;
   margin-top: -1px;
   margin-bottom: -1px;
 }

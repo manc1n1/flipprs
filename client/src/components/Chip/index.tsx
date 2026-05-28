@@ -10,7 +10,7 @@ export function Chip({ value }: { value: number }) {
     <div className={`${styles.chip} ${variant}`}>
       <span className={styles.chipText}>
         {value > 0 ? '+' : ''}
-        {formatCompactNumber(value, 2)}%
+        {formatCompactNumber(value)}%
       </span>
     </div>
   );

@@ -11,7 +11,7 @@ export function formatTimestamp(value: UTCTimestamp): string {
 
 export function formatCompactNumber(
   value: number | null,
-  maximumFractionDigits = 3,
+  maximumFractionDigits = 2,
 ): string {
   if (value == null) return '-';
 

@@ -276,7 +276,7 @@ const Item = ({ itemId }: { itemId: number }) => {
 
   useDocumentTitle(
     item?.name
-      ? `${item.name} - ${formatCompactNumber(getMostRecentItemTrade(item).price, 2)} gp | flipp.rs`
+      ? `${item.name} - ${formatCompactNumber(getMostRecentItemTrade(item).price)} gp | flipp.rs`
       : 'flipp.rs',
   );
 

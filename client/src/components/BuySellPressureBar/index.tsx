@@ -74,7 +74,7 @@ export default function BuySellPressureBar({
         <div>
           <div className={styles.label}>Buy vol</div>
           <div className={buyVolume === 0 ? styles.bold : styles.buyValue}>
-            {buyVolume === 0 ? '-' : formatCompactNumber(buyVolume, 2)}
+            {buyVolume === 0 ? '-' : formatCompactNumber(buyVolume)}
           </div>
         </div>
 
@@ -84,7 +84,7 @@ export default function BuySellPressureBar({
             {ratio ? (
               <>
                 <span className={styles.buyValue}>
-                  {formatCompactNumber(ratio, 2)}
+                  {formatCompactNumber(ratio)}
                 </span>
                 <span>:</span>
                 <span className={styles.sellValue}>1</span>
@@ -98,7 +98,7 @@ export default function BuySellPressureBar({
         <div>
           <div className={styles.label}>Sell vol</div>
           <div className={sellVolume === 0 ? styles.bold : styles.sellValue}>
-            {sellVolume === 0 ? '-' : formatCompactNumber(sellVolume, 2)}
+            {sellVolume === 0 ? '-' : formatCompactNumber(sellVolume)}
           </div>
         </div>
       </div>
