@@ -13,7 +13,8 @@
   gap: 4px;
 }
 
-.titleText {
+.titleText,
+.volumeTooltipText {
   transform: translateY(1px);
 }
 
@@ -26,7 +27,8 @@
   opacity: 0.8;
 }
 
-.tooltip {
+.infoTooltip,
+.volumeTooltip {
   position: absolute;
   opacity: 0;
   bottom: calc(100% + 0.5rem);
@@ -46,7 +48,7 @@
   pointer-events: none;
 }
 
-.infoWrapper:hover .tooltip {
+.infoWrapper:hover .infoTooltip {
   opacity: 1;
 }
 
@@ -64,6 +66,23 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1rem;
+}
+
+.buyPercent,
+.buyBar,
+.sellBar,
+.sellPercent {
+  transition: opacity 0.15s ease;
+}
+
+.dimmed {
+  opacity: 0.35;
+}
+
+.volumeTooltip {
+  font-family: runescape-bold;
+  opacity: 1;
+  min-width: fit-content;
 }
 
 .bar {
@@ -84,8 +103,8 @@
 
 .marker {
   position: absolute;
-  top: -0.5rem;
-  bottom: -0.5em;
+  top: -0.35rem;
+  bottom: -0.35rem;
   width: 2.5px;
   background: var(--text-dark);
   transform: translateX(-50%);
@@ -93,12 +112,12 @@
 }
 
 .buyPercent,
-.buyValue {
+.buyVol {
   color: var(--green-dark);
 }
 
 .sellPercent,
-.sellValue {
+.sellVol {
   color: var(--red-dark);
 }
 
@@ -137,7 +156,8 @@
 }
 
 @media (prefers-color-scheme: light) {
-  .tooltip {
+  .infoTooltip,
+  .volumeTooltip {
     color: var(--text-light);
     background: color-mix(in srgb, var(--accent-light) 50%, transparent);
     border: 1px solid rgb(255 255 255 / 0.5);
@@ -156,12 +176,12 @@
   }
 
   .buyPercent,
-  .buyValue {
+  .buyVol {
     color: var(--green-light);
   }
 
   .sellPercent,
-  .sellValue {
+  .sellVol {
     color: var(--red-light);
   }
 }

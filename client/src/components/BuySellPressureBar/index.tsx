@@ -1,5 +1,6 @@
 import styles from './BuySellPressureBar.module.css';
 
+import { useState } from 'react';
 import { Info } from 'lucide-react';
 
 import { formatCompactNumber } from '@/utils/formatters';
@@ -11,6 +12,8 @@ export default function BuySellPressureBar({
 }: {
   timeseries?: TTimeseries[];
 }) {
+  const [hoverState, setHoverState] = useState<'buy' | 'sell' | null>(null);
+
   const buyVolume =
     timeseries?.reduce((sum, ts) => sum + (ts.highPriceVolume ?? 0), 0) ?? 0;
   const sellVolume =
@@ -19,6 +22,10 @@ export default function BuySellPressureBar({
   const buyPercent = totalVolume > 0 ? (buyVolume / totalVolume) * 100 : 50;
   const sellPercent = totalVolume > 0 ? 100 - buyPercent : 50;
   const ratio = sellVolume > 0 ? buyVolume / sellVolume : null;
+
+  const hoveredVolume = hoverState === 'buy' ? buyVolume : sellVolume;
+  const tooltipLeft =
+    hoverState === 'buy' ? buyPercent / 2 : buyPercent + sellPercent / 2;
 
   return (
     <div className={styles.container}>
@@ -32,7 +39,7 @@ export default function BuySellPressureBar({
 
           <div
             role='tooltip'
-            className={styles.tooltip}
+            className={styles.infoTooltip}
           >
             <span className={styles.tooltipTitle}>Pressure</span>:
             <div>Buy = high-price volume</div>
@@ -48,17 +55,44 @@ export default function BuySellPressureBar({
       </div>
 
       <div className={styles.barRow}>
-        <div className={styles.buyPercent}>{Math.round(buyPercent)}%</div>
+        <div
+          className={`${styles.buyPercent} ${
+            hoverState === 'sell' ? styles.dimmed : ''
+          }`}
+          onMouseEnter={() => setHoverState('buy')}
+          onMouseLeave={() => setHoverState(null)}
+        >
+          {Math.round(buyPercent)}%
+        </div>
 
         <div className={styles.bar}>
+          {hoverState && (
+            <div
+              className={styles.volumeTooltip}
+              style={{ left: `${tooltipLeft}%` }}
+            >
+              <div className={styles.volumeTooltipText}>
+                {hoveredVolume.toLocaleString()}
+              </div>
+            </div>
+          )}
+
           <div
-            className={styles.buyBar}
+            className={`${styles.buyBar} ${
+              hoverState === 'sell' ? styles.dimmed : ''
+            }`}
             style={{ width: `${buyPercent}%` }}
+            onMouseEnter={() => setHoverState('buy')}
+            onMouseLeave={() => setHoverState(null)}
           />
 
           <div
-            className={styles.sellBar}
+            className={`${styles.sellBar} ${
+              hoverState === 'buy' ? styles.dimmed : ''
+            }`}
             style={{ width: `${sellPercent}%` }}
+            onMouseEnter={() => setHoverState('sell')}
+            onMouseLeave={() => setHoverState(null)}
           />
 
           <div
@@ -67,13 +101,21 @@ export default function BuySellPressureBar({
           />
         </div>
 
-        <div className={styles.sellPercent}>{Math.round(sellPercent)}%</div>
+        <div
+          className={`${styles.sellPercent} ${
+            hoverState === 'buy' ? styles.dimmed : ''
+          }`}
+          onMouseEnter={() => setHoverState('sell')}
+          onMouseLeave={() => setHoverState(null)}
+        >
+          {Math.round(sellPercent)}%
+        </div>
       </div>
 
       <div className={styles.stats}>
         <div>
           <div className={styles.label}>Buy vol</div>
-          <div className={buyVolume === 0 ? styles.bold : styles.buyValue}>
+          <div className={buyVolume === 0 ? styles.bold : styles.buyVol}>
             {buyVolume === 0 ? '-' : formatCompactNumber(buyVolume)}
           </div>
         </div>
@@ -83,11 +125,11 @@ export default function BuySellPressureBar({
           <div className={styles.ratio}>
             {ratio ? (
               <>
-                <span className={styles.buyValue}>
+                <span className={styles.buyVol}>
                   {formatCompactNumber(ratio)}
                 </span>
                 <span>:</span>
-                <span className={styles.sellValue}>1</span>
+                <span className={styles.sellVol}>1</span>
               </>
             ) : (
               <span className={styles.bold}>-</span>
@@ -97,7 +139,7 @@ export default function BuySellPressureBar({
 
         <div>
           <div className={styles.label}>Sell vol</div>
-          <div className={sellVolume === 0 ? styles.bold : styles.sellValue}>
+          <div className={sellVolume === 0 ? styles.bold : styles.sellVol}>
             {sellVolume === 0 ? '-' : formatCompactNumber(sellVolume)}
           </div>
         </div>
