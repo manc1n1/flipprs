@@ -209,8 +209,8 @@ const Favourites = () => {
       {
         id: 'highTime',
         header: 'Buy time',
-        align: 'right',
         accessor: (row) => row.highTime ?? 0,
+        align: 'right',
         render: (value) => <LastUpdateTime timestamp={value} />,
       },
       {
@@ -230,30 +230,30 @@ const Favourites = () => {
       {
         id: 'lowTime',
         header: 'Sell time',
-        align: 'right',
         accessor: (row) => row.lowTime ?? 0,
+        align: 'right',
         render: (value) => <LastUpdateTime timestamp={value} />,
       },
       {
         id: 'margin',
         header: 'Margin',
-        align: 'right',
         accessor: (row) => {
           const { marginValue } = getItemMetrics(row);
 
           return marginValue;
         },
+        align: 'right',
         render: (_value, row) => <Margin item={row} />,
       },
       {
         id: 'roi',
         header: 'ROI',
-        align: 'right',
         accessor: (row) => {
           const { roiValue } = getItemMetrics(row);
 
           return roiValue;
         },
+        align: 'right',
         render: (_value, row) => <ROI item={row} />,
       },
       {
@@ -273,14 +273,12 @@ const Favourites = () => {
       {
         id: 'potentialProfit',
         header: 'Potential profit',
-        align: 'right',
         accessor: (row) => {
           const { potentialProfitValue } = getItemMetrics(row);
 
-          if (potentialProfitValue === 0) return null;
-
           return potentialProfitValue;
         },
+        align: 'right',
         render: (_value, row) => <PotentialProfit item={row} />,
       },
       {
