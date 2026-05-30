@@ -22,7 +22,7 @@ function Fallback() {
         minHeight: '100svh',
       }}
     >
-      <Spinner />
+      <Spinner size={128} />
     </div>
   );
 }
