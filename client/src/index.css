@@ -61,8 +61,10 @@
   scrollbar-width: none;
   scrollbar-color: var(--text-dark) transparent;
 
-  [data-sonner-toaster] {
-    bottom: calc(env(safe-area-inset-bottom) + 50px) !important;
+  @supports (-webkit-touch-callout: none) {
+    [data-sonner-toaster] {
+      bottom: calc(env(safe-area-inset-bottom) + 50px) !important;
+    }
   }
 
   #tv-attr-logo {
