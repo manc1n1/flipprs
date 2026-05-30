@@ -44,7 +44,7 @@
   color: var(--text-dark);
   background-color: var(--bg-dark);
 
-  --spinner-color: var(--red-dark);
+  --spinner-rgb: 243, 139, 168;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -79,7 +79,7 @@ body {
     color: var(--text-light);
     background-color: var(--bg-light);
 
-    --spinner-color: var(--red-light);
+    --spinner-rgb: 210, 15, 57;
 
     scrollbar-color: var(--text-light) transparent;
   }

@@ -2,31 +2,33 @@ import { useEffect, useRef } from 'react';
 
 type TSpinnerProps = {
   size?: number;
-  color?: string;
 };
 
 const DRAW_SIZE = 64;
 
-function getCol(hex: string, alpha: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
+function getCol(alpha: number): string {
+  const rgb = getComputedStyle(document.documentElement)
+    .getPropertyValue('--spinner-rgb')
+    .trim();
 
-  return `rgba(${r},${g},${b},${alpha})`;
+  return `rgba(${rgb || '148, 148, 148'}, ${alpha})`;
 }
 
-function draw(ctx: CanvasRenderingContext2D, time: number, color: string) {
+function draw(ctx: CanvasRenderingContext2D, time: number) {
   ctx.clearRect(0, 0, DRAW_SIZE, DRAW_SIZE);
 
   const centerX = DRAW_SIZE / 2;
   const centerY = DRAW_SIZE / 2;
   const scale = 2;
 
+  const crabOffsetX = Math.round(Math.sin(time * 0.003) * 4);
+  const crabBobY = Math.round(Math.sin(time * 0.008) * 1);
+
   const px = (x: number, y: number, alpha: number) => {
-    ctx.fillStyle = getCol(color, alpha);
+    ctx.fillStyle = getCol(alpha);
     ctx.fillRect(
-      Math.round(centerX + x * scale),
-      Math.round(centerY + y * scale),
+      Math.round(centerX + (x + crabOffsetX) * scale),
+      Math.round(centerY + (y + crabBobY) * scale),
       scale,
       scale,
     );
@@ -82,10 +84,10 @@ function draw(ctx: CanvasRenderingContext2D, time: number, color: string) {
   px(1, -2, 0.58);
 
   if (Math.floor(time / 2800) % 6 === 0 && time % 2800 < 160) {
-    ctx.fillStyle = getCol(color, 0.5);
+    ctx.fillStyle = getCol(0.5);
     ctx.fillRect(
-      Math.round(centerX - 1.5 * scale),
-      Math.round(centerY - 3 * scale),
+      Math.round(centerX + (crabOffsetX - 1.5) * scale),
+      Math.round(centerY + (crabBobY - 3) * scale),
       2 * scale,
       Math.max(1, Math.round(0.4 * scale)),
     );
@@ -157,18 +159,12 @@ function draw(ctx: CanvasRenderingContext2D, time: number, color: string) {
   });
 }
 
-export default function Spinner({ size = 64, color }: TSpinnerProps) {
+export default function Spinner({ size = 128 }: TSpinnerProps) {
   const ref = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
-
-    const spinnerColor =
-      color ??
-      getComputedStyle(document.documentElement)
-        .getPropertyValue('--spinner-color')
-        .trim();
 
     const dpr = window.devicePixelRatio || 1;
 
@@ -184,14 +180,14 @@ export default function Spinner({ size = 64, color }: TSpinnerProps) {
     let rafId = 0;
 
     const loop = () => {
-      draw(ctx, performance.now() - startTime, spinnerColor);
+      draw(ctx, performance.now() - startTime);
       rafId = requestAnimationFrame(loop);
     };
 
     rafId = requestAnimationFrame(loop);
 
     return () => cancelAnimationFrame(rafId);
-  }, [color]);
+  }, []);
 
   return (
     <canvas
